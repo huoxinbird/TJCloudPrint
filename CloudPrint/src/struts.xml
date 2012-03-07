@@ -7,16 +7,16 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="false" />
-<!--
+
     <package name="admin" namespace="/admin" extends="struts-default">
-		<action name="login" class="cn.edu.tongji.sse." method="login">
-            <result>/jsp/register.jsp</result>
+		<action name="code" class="cn.edu.tongji.sse.action.AdminAction">
+            <result>/index.html</result>
         </action>
         
     </package>
 
     
 
-     Add packages here -->
+    <!-- Add packages here -->
 
 </struts>
