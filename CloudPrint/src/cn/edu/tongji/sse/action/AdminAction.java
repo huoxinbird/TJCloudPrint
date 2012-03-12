@@ -19,6 +19,17 @@ public class AdminAction implements ServletRequestAware {
 	private String code;
 	private HttpServletRequest servletRequest;
 
+	ApplicationContext context;
+	
+	
+	public AdminAction() {
+		super();
+		// TODO Auto-generated constructor stub
+		this.context = new ClassPathXmlApplicationContext("account.xml");
+				
+		
+	}
+
 	public String getCode() {
 		return this.code;
 	}
@@ -48,10 +59,15 @@ public class AdminAction implements ServletRequestAware {
 		return "success";
 	}
 	
+	public String login() {
+		
+		
+		return "success";
+		
+	}
+	
 	private void requestAccessToken(String code) throws IOException {
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"account.xml");
-
+		
 		Client client = (Client) context.getBean("client");
 
 		try {

@@ -11,6 +11,17 @@
     <package name="admin" namespace="/admin" extends="struts-default">
 		<action name="authorize" class="cn.edu.tongji.sse.action.AdminAction" method="authorize">
             <result>/index.html</result>
+            
+        </action>
+        
+        <action name="login" class="cn.edu.tongji.sse.action.AdminAction" method="login">
+        	<result type="redirect">
+            	
+            <!--&redirect_uri=http://localhost:8080/CloudPrint/admin/authorize;  &response_type=code-->
+            
+              <param name="location">https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/cloudprint&client_id=832073330202.apps.googleusercontent.com&approval_prompt=force</param>
+  <param name="parse">false</param>
+            </result>
         </action>
         
     </package>
