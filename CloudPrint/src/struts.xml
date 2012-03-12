@@ -9,7 +9,7 @@
     <constant name="struts.devMode" value="false" />
 
     <package name="admin" namespace="/admin" extends="struts-default">
-		<action name="code" class="cn.edu.tongji.sse.action.AdminAction">
+		<action name="authorize" class="cn.edu.tongji.sse.action.AdminAction" method="authorize">
             <result>/index.html</result>
         </action>
         
