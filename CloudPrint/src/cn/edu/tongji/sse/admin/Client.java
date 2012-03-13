@@ -3,7 +3,15 @@ package cn.edu.tongji.sse.admin;
 public class Client {
 	private String clientId;
 	private String clientSecret;
+
+	private String token;
 	
+	public synchronized String getToken() {
+		return token;
+	}
+	public synchronized void setToken(String token) {
+		this.token = token;
+	}
 	public String getClientId() {
 		return clientId;
 	}
@@ -16,6 +24,7 @@ public class Client {
 	public void setClientSecret(String clientSecret) {
 		this.clientSecret = clientSecret;
 	}
+
 	
 	
 }
