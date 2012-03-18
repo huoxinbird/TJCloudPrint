@@ -1,6 +1,6 @@
 package cn.edu.tongji.sse.admin;
 
-import org.springframework.beans.BeansException;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -20,7 +20,7 @@ public class ClientManager {
 		// TODO Auto-generated constructor stub
 		System.out.println("ClientManager init");
 		try {
-			context = new ClassPathXmlApplicationContext("account.xml");
+			this.context = new ClassPathXmlApplicationContext("account.xml");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("account error");
