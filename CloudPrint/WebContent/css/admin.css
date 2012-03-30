@@ -1,0 +1,64 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #4c93e5;
+}
+
+#header {
+	background-color: #252525;
+	height: 40px;
+	box-shadow: 0 4px 8px rgba(78, 68, 60, 0.5);
+	color: white;
+}
+
+#container {
+    margin: 10px 20px;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 0 2px 3px rgba(78, 68, 60, 0.3);
+
+    
+    background-color: white;
+    max-width: 500px;
+    padding: 10px;
+    
+}
+
+#title {
+	
+	text-align: center;
+	
+	vertical-align: middle;
+}
+
+
+
+#form_wrapper {
+	margin: 0 auto;
+	/*width: 340px;*/
+	background-color: #10e4fe;
+	padding: 20px;
+	min-width: 100px;
+	max-width: 400px;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+#login_form div {
+	/*border: 1px solid black;*/
+	margin: 7px auto;
+	/*padding: 0;*/
+}
+
+#login_form input {
+	
+    	
+	/*padding: 0px 0px 0px 5px;*/
+	/*border: none;*/
+	height: 32px;
+	width: 100%;
+	-moz-box-sizing: border-box;
+    
+}
