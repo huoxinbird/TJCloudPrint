@@ -2,16 +2,24 @@ package cn.edu.tongji.sse.action;
 
 
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
-
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.google.api.client.auth.oauth2.draft10.AccessTokenRequest.AuthorizationCodeGrant;
 import com.google.api.client.auth.oauth2.draft10.AccessTokenResponse;
 
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson.JacksonFactory;
+
 
 import cn.edu.tongji.sse.admin.*;
 
@@ -51,6 +59,41 @@ public class AdminAction implements ServletRequestAware {
 	}
 
 	public String login() {
+		Context ctx = null;
+		DataSource ds= null;
+		try {
+			ctx = new InitialContext();
+			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/TestDB");
+			
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		  
+		Connection conn = null;
+		PreparedStatement pStatement = null;
+		ResultSet rs = null;
+		try {
+			conn = ds.getConnection();
+			System.out.println("get connection");
+			
+			pStatement = conn.prepareStatement(
+	                "select * from testdata");
+			rs = pStatement.executeQuery();
+	        if (rs.next()) {
+	        	System.out.println(rs.getString("foo"));
+	        	System.out.println(rs.getString("bar"));
+	        }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		} 
+		
+		
+		
+		
 		String hostName = this.servletRequest.getHeader("Host");
 		System.out.println(hostName);
 		if (hostName.startsWith("localhost")) {
