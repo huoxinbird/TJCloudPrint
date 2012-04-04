@@ -21,7 +21,7 @@ public class ClientManager {
 		System.out.println("ClientManager init");
 		try {
 			this.context = new ClassPathXmlApplicationContext("account.xml");
-			this.context = new ClassPathXmlApplicationContext("aa.xml","bb.xml");
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
