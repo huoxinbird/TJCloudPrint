@@ -24,6 +24,7 @@
     <!-- <property name="hbm2ddl.auto">update</property> -->
     
     <mapping resource="org/hibernate/tutorial/domain/Event.hbm.xml"/>
+    <mapping class="com.apress.hibernate.User"/>
     
   </session-factory>
 </hibernate-configuration>
