@@ -5,17 +5,16 @@
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/TestDB" />
+	</bean>
 
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 
-
-
-		<property name="configLocation">
-			<value>classpath:hibernate.cfg.xml</value>
-		</property>
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="cn.edu.tongji.sse.model" />
 
 	</bean>
 

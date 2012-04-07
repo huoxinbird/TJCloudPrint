@@ -5,6 +5,9 @@ import javax.persistence.*;
 
 @Entity
 public class Guest implements Serializable {
+
+	private static final long serialVersionUID = -6925661679308746598L;
+
 	private Long id;
 	private String name;
 	
