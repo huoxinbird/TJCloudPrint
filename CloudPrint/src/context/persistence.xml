@@ -26,7 +26,12 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	</bean>
 
-
+	
+	<bean id="guestDAO" class="cn.edu.tongji.sse.dao.GuestDao">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
 
 
 

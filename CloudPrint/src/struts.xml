@@ -7,7 +7,7 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="false" />
-	<!-- <constant name="struts.objectFactory" value="spring" /> -->
+	<constant name="struts.objectFactory" value="spring" />
 
     <package name="admin" namespace="/admin" extends="struts-default">
 		<action name="authorize" class="cn.edu.tongji.sse.action.AdminAction" method="authorize">
@@ -25,9 +25,21 @@
         </action>
         
     </package>
-
+    
+    
+	<package name="guest" namespace="/guest" extends="struts-default">
+		<action name="login" class="cn.edu.tongji.sse.action.GuestAction" method="login">
+            <result>/index.html</result>
+            <result name="error">/index.html</result>
+        </action>
+	
+	
+	</package>
     
 
     <!-- Add packages here -->
+    
+    
+    
 
 </struts>
