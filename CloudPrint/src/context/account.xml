@@ -6,7 +6,7 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	
 	
-	<bean id="client" class="cn.edu.tongji.sse.admin.Client">
+	<bean id="client" class="cn.edu.tongji.sse.gcp.Client">
 		
 		<property name="clientId" value="832073330202.apps.googleusercontent.com" />
 		<property name="clientSecret" value="KH0R5xVQOAwY1lz1HNY4Z3zm" />

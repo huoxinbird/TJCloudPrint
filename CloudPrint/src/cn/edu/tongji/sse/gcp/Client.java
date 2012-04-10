@@ -1,4 +1,4 @@
-package cn.edu.tongji.sse.admin;
+package cn.edu.tongji.sse.gcp;
 
 public class Client {
 	private String clientId;
