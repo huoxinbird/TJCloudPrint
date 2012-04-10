@@ -16,7 +16,7 @@ public class GuestService implements IGuestService {
 	
 	public boolean register(Guest g) {
 	
-		if (this.guestDao.isExist(g.getName())) {
+		if (this.guestDao.isExist(g.getUsername())) {
 			return false;
 		}
 		
@@ -26,7 +26,9 @@ public class GuestService implements IGuestService {
 	
 	public boolean login(Guest g) {
 		
-		
+		if (this.guestDao.isValid(g.getUsername(), g.getPassword())) {
+			return true;
+		}
 		
 		return false;
 	}
