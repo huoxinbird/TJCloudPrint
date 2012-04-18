@@ -27,19 +27,30 @@ public class GuestAction implements ModelDriven<Guest> {
 
 	public String register() {
 		
+		System.out.println("username: "+guest.getUsername());
+		System.out.println("password: "+guest.getPassword());
 		this.guestService.register(this.guest);
+		
+		
 		
 		return "success";
 	}
 	
 	
-	public void setGuest(Guest guest) {
-		this.guest = guest;
-	}
+//	public void setGuest(Guest guest) {
+//		
+//		System.out.println("username: "+guest.getUsername());
+//		System.out.println("password:"+guest.getPassword());
+//		
+//		this.guest = guest;
+//	}
 
 	
 	public Guest getModel() {
+		System.out.println("GuestAction.getModel()");
 		
-		return new Guest();
+		this.guest = new Guest();
+		
+		return this.guest;
 	}
 }

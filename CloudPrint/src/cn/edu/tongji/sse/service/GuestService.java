@@ -20,6 +20,9 @@ public class GuestService implements IGuestService {
 			return false;
 		}
 		
+		this.guestDao.insertGuest(g);
+		
+		
 		return true;
 	}
 
@@ -27,6 +30,7 @@ public class GuestService implements IGuestService {
 	public boolean login(Guest g) {
 		
 		if (this.guestDao.isValid(g.getUsername(), g.getPassword())) {
+			System.out.println("valid username and password");
 			return true;
 		}
 		
