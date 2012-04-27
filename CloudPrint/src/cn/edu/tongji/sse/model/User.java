@@ -1,18 +1,23 @@
 package cn.edu.tongji.sse.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
-public class Guest implements Serializable {
+public class User implements Serializable {
 
 	private static final long serialVersionUID = -6925661679308746598L;
 
 	private Long id;
 	private String username;
 	private String password;
+	private List<Shop> shops = new ArrayList<Shop>();
 	
-	public Guest() { }
+	
+	public User() { }
 	
 	
 	@Id
@@ -45,6 +50,22 @@ public class Guest implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	@OneToMany(mappedBy = "user")
+	public List<Shop> getShops() {
+		return shops;
+	}
+
+
+	public void setShops(List<Shop> shops) {
+		this.shops = shops;
+	}
+
+	
+    
+	
+	
+
 	
 	
 }

@@ -33,7 +33,7 @@
 	</bean>
 
 	
-	<bean id="guestDAO" class="cn.edu.tongji.sse.dao.GuestDao">
+	<bean id="userDAO" class="cn.edu.tongji.sse.dao.UserDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 			
 	</bean>

@@ -27,7 +27,24 @@
     </package>
     
     
-	<package name="guest" namespace="/guest" extends="struts-default">
+	<package name="user" namespace="/" extends="struts-default">
+		<action name="login" class="cn.edu.tongji.sse.action.UserAction" method="login">
+            <result>/index.html</result>
+            <result name="error">/index.html</result>
+        </action>
+	
+		<action name="register" class="cn.edu.tongji.sse.action.UserAction" method="register">
+            <result>/index.html</result>
+            <result name="error">/index.html</result>
+        </action>
+	
+	</package>
+    
+    
+
+
+    <!-- Add packages here -->
+    <package name="shop" namespace="/shop" extends="struts-default">
 		<action name="login" class="cn.edu.tongji.sse.action.GuestAction" method="login">
             <result>/index.html</result>
             <result name="error">/index.html</result>
@@ -39,12 +56,6 @@
         </action>
 	
 	</package>
-    
-    
-
-
-    <!-- Add packages here -->
-    
     
     
 
