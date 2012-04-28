@@ -6,9 +6,14 @@ import cn.edu.tongji.sse.model.User;
 
 public interface IUserService {
 
-	public boolean register(User g);
-	
-	public boolean login(User g);
+	public User userWithCookie(Cookie[] cookies);;
+	public boolean register(User u);
+		
+	/**
+	 * @param u User POJO
+	 * @return Succeed or not
+	 */
+	public boolean login(User u);
 	
 	public boolean isUserLoggedIn(Cookie[] cookies);
 }

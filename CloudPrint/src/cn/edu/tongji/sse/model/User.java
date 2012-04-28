@@ -17,8 +17,6 @@ public class User implements Serializable {
 	private List<Shop> shops = new ArrayList<Shop>();
 	
 	
-	public User() { }
-	
 	
 	@Id
 	@GeneratedValue

@@ -6,31 +6,53 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import javax.servlet.http.HttpServletResponse;
+
+
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.opensymphony.xwork2.ModelDriven;
 
 import cn.edu.tongji.sse.model.User;
 import cn.edu.tongji.sse.service.IUserService;
 
-public class UserAction implements ModelDriven<User>, ServletRequestAware {
-	
+public class UserAction implements ModelDriven<User>, ServletResponseAware, ServletRequestAware {
+			
 	private IUserService userService;
 	private User user;
-	private HttpServletRequest request;
-			
+	
+
+	private HttpServletResponse response;
+	private HttpServletRequest request;		
 	
 	@Resource
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
 
-	public String login() {
+	public String logout() {
+		System.out.println("UserAction.logout()");
+		Cookie usernameCookie = new Cookie("username", "");
+		usernameCookie.setMaxAge(0);
+		Cookie passwordCookie = new Cookie("password", "");
+		passwordCookie.setMaxAge(0);
+		response.addCookie(usernameCookie);
+		response.addCookie(passwordCookie);
 		
-		if (this.userService.login(this.user)) {
-			//Cookie[] cookies = this.request.getCookies();
+		return "success";
+	}
+	
+	public String login() {
+		if (user.getUsername() == null) {
+			return "input";
+		}
+		
+		
+		if (this.userService.login(this.user)) {			
 			
-			
+			response.addCookie(new Cookie("username", this.user.getUsername()));
+			response.addCookie(new Cookie("password", this.user.getPassword()));
 			
 			return "success";
 		}
@@ -53,13 +75,19 @@ public class UserAction implements ModelDriven<User>, ServletRequestAware {
 	}
 	
 	
-//	public void setGuest(Guest guest) {
-//		
-//		System.out.println("username: "+guest.getUsername());
-//		System.out.println("password:"+guest.getPassword());
-//		
-//		this.guest = guest;
-//	}
+	public String home() {
+		user = userService.userWithCookie(request.getCookies());
+		
+		if (user == null) {
+			return "input";
+		}
+		
+		if (userService.login(user)){
+			return "success";
+		}
+		
+		return "input";
+	}
 
 	
 	public User getModel() {
@@ -71,10 +99,19 @@ public class UserAction implements ModelDriven<User>, ServletRequestAware {
 	}
 
 	
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+
+	}
+	
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
-		
 	}
+
+	public User getUser() {
+		return user;
+	}
+
 
 
 }

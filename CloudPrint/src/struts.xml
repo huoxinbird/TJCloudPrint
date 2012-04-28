@@ -29,14 +29,24 @@
     
 	<package name="user" namespace="/" extends="struts-default">
 		<action name="login" class="cn.edu.tongji.sse.action.UserAction" method="login">
-            <result>/index.html</result>
-            <result name="error">/index.html</result>
+            <result type="redirectAction">home</result>
+            <result name="input">/jsp/login.jsp</result>
         </action>
 	
 		<action name="register" class="cn.edu.tongji.sse.action.UserAction" method="register">
-            <result>/index.html</result>
-            <result name="error">/index.html</result>
+            <result>/jsp/home.jsp</result>
+            <result name="error">/jsp/login.jsp</result>
         </action>
+        
+        <action name="logout" class="cn.edu.tongji.sse.action.UserAction" method="logout">
+            <result type="redirectAction">login</result>
+            
+        </action> 
+        
+        <action name="home" class="cn.edu.tongji.sse.action.UserAction" method="home">
+            <result>/jsp/home.jsp</result>
+            <result name="input" type="redirectAction">login</result>
+        </action> 
 	
 	</package>
     
@@ -50,10 +60,7 @@
             <result name="error">/index.html</result>
         </action>
 	
-		<action name="register" class="cn.edu.tongji.sse.action.GuestAction" method="register">
-            <result>/index.html</result>
-            <result name="error">/index.html</result>
-        </action>
+		
 	
 	</package>
     

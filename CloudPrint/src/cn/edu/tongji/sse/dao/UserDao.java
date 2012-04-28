@@ -9,7 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import cn.edu.tongji.sse.model.Shop;
+
 import cn.edu.tongji.sse.model.User;
 
 public class UserDao extends HibernateDaoSupport implements IUserDao {
@@ -25,8 +25,7 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 						Restrictions.eq("password", password)).list();
 				
 				
-				User user = result.get(0);
-				System.out.println("user shop name: "+user.getShops().get(0).getName());
+				
 				
 				return result;
 			}
@@ -60,11 +59,9 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 
 	
 	public void insertUser(User user) {
-		Shop shop = new Shop();
-		shop.setUser(user);
-		shop.setName("firstshop");
+
 		getHibernateTemplate().saveOrUpdate(user);
-		getHibernateTemplate().save(shop);
+		
 	}
 
 	
