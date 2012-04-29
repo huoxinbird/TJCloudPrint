@@ -26,6 +26,10 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 	private HttpServletResponse response;
 	private HttpServletRequest request;		
 	
+	final static String USERNAME = "username";
+	final static String PASSWORD = "password";
+	final static String USERID = "userId";
+	
 	@Resource
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
@@ -33,26 +37,39 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 
 	public String logout() {
 		System.out.println("UserAction.logout()");
-		Cookie usernameCookie = new Cookie("username", "");
+		
+		//remove cookie
+		Cookie usernameCookie = new Cookie(USERNAME, "");
 		usernameCookie.setMaxAge(0);
-		Cookie passwordCookie = new Cookie("password", "");
+		Cookie passwordCookie = new Cookie(PASSWORD, "");
 		passwordCookie.setMaxAge(0);
+		Cookie useridCookie = new Cookie(USERID, "");
+		useridCookie.setMaxAge(0);
 		response.addCookie(usernameCookie);
 		response.addCookie(passwordCookie);
+		response.addCookie(useridCookie);
 		
 		return "success";
 	}
 	
+	private boolean isPostMethod() {
+		String method = request.getMethod();
+		boolean isPostMethod = method.equalsIgnoreCase("POST");
+		return isPostMethod;
+	}
+	
 	public String login() {
-		if (user.getUsername() == null) {
+		if (!isPostMethod()) {
 			return "input";
 		}
-		
+				
 		
 		if (this.userService.login(this.user)) {			
 			
-			response.addCookie(new Cookie("username", this.user.getUsername()));
-			response.addCookie(new Cookie("password", this.user.getPassword()));
+			//add cookie
+			response.addCookie(new Cookie(USERNAME, this.user.getUsername()));
+			response.addCookie(new Cookie(PASSWORD, this.user.getPassword()));			
+			response.addCookie(new Cookie(USERID, this.user.getId().toString()));
 			
 			return "success";
 		}
@@ -64,25 +81,25 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 	}
 
 	public String register() {
+		if (!isPostMethod()) {
+			return "input";
+		}
 		
 		System.out.println("username: "+user.getUsername());
 		System.out.println("password: "+user.getPassword());
-		this.userService.register(this.user);
 		
+		if (userService.register(user)) {
+			return "success";
+		}
 		
-		
-		return "success";
+
+		return "input";
 	}
 	
 	
 	public String home() {
-		user = userService.userWithCookie(request.getCookies());
 		
-		if (user == null) {
-			return "input";
-		}
-		
-		if (userService.login(user)){
+		if (userService.isValid(user)){
 			return "success";
 		}
 		
@@ -111,6 +128,8 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 	public User getUser() {
 		return user;
 	}
+
+
 
 
 

@@ -28,14 +28,36 @@
     
     
 	<package name="user" namespace="/" extends="struts-default">
+	<interceptors>
+		<interceptor-stack name="cookieStack">
+			<interceptor-ref name="exception" />
+			<interceptor-ref name="servletConfig" />
+
+			<interceptor-ref name="modelDriven" />
+			<interceptor-ref name="cookie">
+				<param name="cookiesName">username, password, userId</param>
+				<param name="cookiesValue">*</param>
+			</interceptor-ref>
+
+			<interceptor-ref name="actionMappingParams" />
+			<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor-ref>
+			<interceptor-ref name="conversionError" />
+
+		</interceptor-stack>
+	</interceptors>
+	
+		<default-interceptor-ref name="cookieStack"/>
+	
 		<action name="login" class="cn.edu.tongji.sse.action.UserAction" method="login">
             <result type="redirectAction">home</result>
             <result name="input">/jsp/login.jsp</result>
         </action>
 	
 		<action name="register" class="cn.edu.tongji.sse.action.UserAction" method="register">
-            <result>/jsp/home.jsp</result>
-            <result name="error">/jsp/login.jsp</result>
+            <result type="redirectAction">home</result>
+            <result name="input">/jsp/login.jsp</result>
         </action>
         
         <action name="logout" class="cn.edu.tongji.sse.action.UserAction" method="logout">
@@ -48,6 +70,7 @@
             <result name="input" type="redirectAction">login</result>
         </action> 
 	
+		
 	</package>
     
     
@@ -55,9 +78,9 @@
 
     <!-- Add packages here -->
     <package name="shop" namespace="/shop" extends="struts-default">
-		<action name="login" class="cn.edu.tongji.sse.action.GuestAction" method="login">
-            <result>/index.html</result>
-            <result name="error">/index.html</result>
+		<action name="list" class="cn.edu.tongji.sse.action.ShopAction" method="list">
+            <result>/jsp/shopCenter.jsp</result>
+            <result name="input" type="redirectAction">login</result>
         </action>
 	
 		

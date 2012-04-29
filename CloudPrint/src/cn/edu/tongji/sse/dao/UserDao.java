@@ -15,7 +15,7 @@ import cn.edu.tongji.sse.model.User;
 public class UserDao extends HibernateDaoSupport implements IUserDao {
 
 	
-	public boolean isValid(final String username, final String password) {
+	public User getUser(final String username, final String password) {
 		List<User> list = getHibernateTemplate().execute(new HibernateCallback< List<User> > () {
 			@SuppressWarnings("unchecked")
 			public List<User> doInHibernate(Session session)
@@ -30,11 +30,11 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 				return result;
 			}
 		});
-		if (list.size() > 0) {
+		if (list.size() == 1) {
 			
-			return true;
+			return list.get(0);
 		} else {
-			return false;
+			return null;
 		}
 	}
 
@@ -57,6 +57,19 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 		}
 	}
 
+	public boolean isValid(User user) {
+		if (user.getId() <= 0) {
+			return false;
+		}
+		
+		User u = getHibernateTemplate().get(User.class,new Long(user.getId()));
+				
+		if (u.getPassword().equals(user.getPassword()) && u.getUsername().equals(user.getUsername())) {
+			return true;
+		}
+		
+		return false;
+	}
 	
 	public void insertUser(User user) {
 

@@ -27,8 +27,15 @@ public class User implements Serializable {
 		this.id = id;
 	}
 	
+	public void setUserId(String id) {
+		System.out.println("User.setUserId()"+id);
+		this.id = Long.parseLong(id);
+	}
 	
-
+	@Transient
+	public String getUserId() {
+		return this.id.toString();
+	}
 
 	public String getPassword() {
 		return password;

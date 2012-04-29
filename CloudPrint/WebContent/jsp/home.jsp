@@ -10,7 +10,9 @@
 <body>
 welcome, <s:property value="user.username"/> !
 
-<a href="">我是打印店老板</a>
+<a href="/CloudPrint/shop/list">我是打印店老板</a>
+<a href="/CloudPrint/">我是打印店顾客</a>
+
 <a href="/CloudPrint/logout">登出</a>
 
 </body>

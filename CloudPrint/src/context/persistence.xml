@@ -38,7 +38,10 @@
 			
 	</bean>
 
-
+	<bean id="shopDAO" class="cn.edu.tongji.sse.dao.ShopDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+			
+	</bean>
 
 
 </beans>

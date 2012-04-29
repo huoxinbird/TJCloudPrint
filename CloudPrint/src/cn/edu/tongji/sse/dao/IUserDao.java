@@ -4,7 +4,7 @@ import cn.edu.tongji.sse.model.User;
 
 
 public interface IUserDao {
-	public boolean isValid(String username, String password);
+	public User getUser(String username, String password);
 
 	public boolean isExist(String username);
 
@@ -12,7 +12,7 @@ public interface IUserDao {
 
 	public User getUser(String userId);
 
-	
+	public boolean isValid(User user);
 
 	public void deleteUser(String userId);
 }

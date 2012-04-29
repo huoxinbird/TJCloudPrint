@@ -1,12 +1,12 @@
 package cn.edu.tongji.sse.service;
 
-import javax.servlet.http.Cookie;
+
 
 import cn.edu.tongji.sse.model.User;
 
 public interface IUserService {
 
-	public User userWithCookie(Cookie[] cookies);;
+	
 	public boolean register(User u);
 		
 	/**
@@ -15,5 +15,5 @@ public interface IUserService {
 	 */
 	public boolean login(User u);
 	
-	public boolean isUserLoggedIn(Cookie[] cookies);
+	public boolean isValid(User u);
 }
