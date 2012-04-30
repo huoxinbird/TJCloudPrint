@@ -12,6 +12,9 @@ public class Shop implements Serializable {
 	private Long id;
 	private String name;
 	
+	
+//	private String userId;
+	
 	private User user;
 	
 	
@@ -31,7 +34,7 @@ public class Shop implements Serializable {
 	}
 	
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
 	public User getUser() {
 		return user;
@@ -39,6 +42,14 @@ public class Shop implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+//	@Column(name="user_id")
+//	public String getUserId() {
+//		return userId;
+//	}
+//	public void setUserId(String userId) {
+//		this.userId = userId;
+//	}
 
 
 	

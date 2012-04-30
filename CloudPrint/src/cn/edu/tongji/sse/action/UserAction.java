@@ -3,27 +3,27 @@ package cn.edu.tongji.sse.action;
 
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletResponse;
+
 
 
 import org.apache.struts2.interceptor.ServletRequestAware;
-import org.apache.struts2.interceptor.ServletResponseAware;
 
-import com.opensymphony.xwork2.ModelDriven;
-
+import cn.edu.tongji.sse.interceptor.SessionUser;
 import cn.edu.tongji.sse.model.User;
 import cn.edu.tongji.sse.service.IUserService;
 
-public class UserAction implements ModelDriven<User>, ServletResponseAware, ServletRequestAware {
+public class UserAction implements ServletRequestAware, SessionUser {
 			
 	private IUserService userService;
 	private User user;
 	
-
-	private HttpServletResponse response;
+	private String username;
+	private String password;
+	
+	
 	private HttpServletRequest request;		
 	
 	final static String USERNAME = "username";
@@ -38,16 +38,21 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 	public String logout() {
 		System.out.println("UserAction.logout()");
 		
-		//remove cookie
-		Cookie usernameCookie = new Cookie(USERNAME, "");
-		usernameCookie.setMaxAge(0);
-		Cookie passwordCookie = new Cookie(PASSWORD, "");
-		passwordCookie.setMaxAge(0);
-		Cookie useridCookie = new Cookie(USERID, "");
-		useridCookie.setMaxAge(0);
-		response.addCookie(usernameCookie);
-		response.addCookie(passwordCookie);
-		response.addCookie(useridCookie);
+//		//remove cookie
+//		Cookie usernameCookie = new Cookie(USERNAME, "");
+//		usernameCookie.setMaxAge(0);
+//		Cookie passwordCookie = new Cookie(PASSWORD, "");
+//		passwordCookie.setMaxAge(0);
+//		Cookie useridCookie = new Cookie(USERID, "");
+//		useridCookie.setMaxAge(0);
+//		response.addCookie(usernameCookie);
+//		response.addCookie(passwordCookie);
+//		response.addCookie(useridCookie);
+		
+		
+		request.getSession().removeAttribute(USERNAME);
+		request.getSession().removeAttribute(PASSWORD);
+		request.getSession().removeAttribute(USERID);
 		
 		return "success";
 	}
@@ -63,13 +68,18 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 			return "input";
 		}
 				
+		user = userService.login(username,password);
 		
-		if (this.userService.login(this.user)) {			
+		if (user != null) {			
 			
-			//add cookie
-			response.addCookie(new Cookie(USERNAME, this.user.getUsername()));
-			response.addCookie(new Cookie(PASSWORD, this.user.getPassword()));			
-			response.addCookie(new Cookie(USERID, this.user.getId().toString()));
+//			//add cookie
+//			response.addCookie(new Cookie(USERNAME, this.user.getUsername()));
+//			response.addCookie(new Cookie(PASSWORD, this.user.getPassword()));			
+//			response.addCookie(new Cookie(USERID, this.user.getId().toString()));
+			
+			request.getSession().setAttribute(USERNAME, user.getUsername());
+			request.getSession().setAttribute(PASSWORD, user.getPassword());
+			request.getSession().setAttribute(USERID, user.getUserId());
 			
 			return "success";
 		}
@@ -85,10 +95,8 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 			return "input";
 		}
 		
-		System.out.println("username: "+user.getUsername());
-		System.out.println("password: "+user.getPassword());
 		
-		if (userService.register(user)) {
+		if (userService.register(username,password)) {
 			return "success";
 		}
 		
@@ -99,7 +107,8 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 	
 	public String home() {
 		
-		if (userService.isValid(user)){
+		if (user != null){
+			
 			return "success";
 		}
 		
@@ -107,19 +116,8 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 	}
 
 	
-	public User getModel() {
-		System.out.println("UserAction.getModel()");
-		
-		this.user = new User();
-		
-		return this.user;
-	}
 
-	
-	public void setServletResponse(HttpServletResponse response) {
-		this.response = response;
 
-	}
 	
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
@@ -128,6 +126,28 @@ public class UserAction implements ModelDriven<User>, ServletResponseAware, Serv
 	public User getUser() {
 		return user;
 	}
+
+	public void setSessionUser(User u) {
+		this.user = u;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	
 
 
 

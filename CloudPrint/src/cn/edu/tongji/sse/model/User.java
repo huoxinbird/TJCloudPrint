@@ -1,8 +1,7 @@
 package cn.edu.tongji.sse.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.persistence.*;
 
@@ -14,7 +13,7 @@ public class User implements Serializable {
 	private Long id;
 	private String username;
 	private String password;
-	private List<Shop> shops = new ArrayList<Shop>();
+//	private List<Shop> shops = new ArrayList<Shop>();
 	
 	
 	
@@ -56,15 +55,15 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	@OneToMany(mappedBy = "user")
-	public List<Shop> getShops() {
-		return shops;
-	}
-
-
-	public void setShops(List<Shop> shops) {
-		this.shops = shops;
-	}
+//	@OneToMany(mappedBy = "user")
+//	public List<Shop> getShops() {
+//		return shops;
+//	}
+//
+//
+//	public void setShops(List<Shop> shops) {
+//		this.shops = shops;
+//	}
 
 	
     

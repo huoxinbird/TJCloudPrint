@@ -26,36 +26,33 @@ public class UserService implements IUserService {
 	}
 
 	
-	public boolean register(User u) 
+	public boolean register(String username, String password) 
 	{
 	
-		if (this.userDao.isExist(u.getUsername())) {
+		if (this.userDao.isExist(username)) {
 			return false;
 		}
 		
-		this.userDao.insertUser(u);
+		User u = new User();
+		u.setPassword(password);
+		u.setUsername(username);
 		
+		this.userDao.insertUser(u);		
 		
 		return true;
 	}
 
 	
-	public boolean login(User u) 
+	public User login(String username, String password)
 	{		
-		String un = u.getUsername();
-		String pw = u.getPassword();
-		if (un == null || pw == null) {
-			return false;
+		if (username == null || password == null) {
+			return null;
 		}
 		
-		User user = this.userDao.getUser(un, pw);
-		if (user != null) {
-			System.out.println("valid username and password with id:"+user.getId());
-			u.setId(user.getId());
-			return true;
-		}
+		User user = this.userDao.getUser(username, password);
 		
-		return false;
+		
+		return user;
 	}
 
 	@Resource
