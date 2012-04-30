@@ -4,27 +4,25 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.ModelDriven;
 
+import cn.edu.tongji.sse.interceptor.SessionUser;
 import cn.edu.tongji.sse.model.Shop;
 import cn.edu.tongji.sse.model.User;
 import cn.edu.tongji.sse.service.IShopService;
-import cn.edu.tongji.sse.service.IUserService;
 
 
 
-public class ShopAction implements ModelDriven<User> {
+
+public class ShopAction implements SessionUser, ModelDriven<Shop> {
 	
 	private User user;
 	private Shop shop;
-	private IUserService userService;
+
 	private IShopService shopService;
 	
-	private String shopName;
 	
 	
-	@Resource
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
+	
+
 	
 	@Resource
 	public void setShopService(IShopService shopService) {
@@ -32,23 +30,21 @@ public class ShopAction implements ModelDriven<User> {
 	}
 	
 	public String list() {
-		System.out.println("ShopAction.list()");
-		if (!userService.isValid(user)){
+		
+		if (user == null){
 			return "input";
 		}
 		
 		this.shop = shopService.getShopForUser(user);
-		
+		System.out.println("list username:"+user.getUsername());
 		return "success";
 	}
 	
 	public String open() {
-		if (!userService.isValid(user)){
+		if (user == null){
 			return "input";
 		}
 		
-		shop = new Shop();
-		shop.setName(shopName);
 		
 		if (shopService.addShopForUser(user, shop))
 		{
@@ -58,27 +54,34 @@ public class ShopAction implements ModelDriven<User> {
 		return "input";
 	}
 
-	public User getUser() {
+	public User getSessionUser() {
+		System.out.println("ShopAction.getUser()");
+		System.out.println("get username:"+user.getUsername());
+		
 		return user;
 	}
 
-	public User getModel() {		
-		
-		this.user = new User();
-		
-		return this.user;
-	}
 
 	public Shop getShop() {
+		System.out.println("get shop name:"+shop.getName());
+		
 		return shop;
 	}
 
-	public String getShopName() {
-		return shopName;
+
+
+	
+	public void setSessionUser(User user) {
+		System.out.println("set username:"+user.getUsername());
+		this.user = user;
+		
 	}
 
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
+	
+	public Shop getModel() {
+		this.shop = new Shop();
+		
+		return shop;
 	}
 
 	

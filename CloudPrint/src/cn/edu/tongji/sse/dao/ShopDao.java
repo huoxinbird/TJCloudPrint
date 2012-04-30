@@ -40,7 +40,7 @@ public class ShopDao extends HibernateDaoSupport implements IShopDao {
 			
 		
 		if (list.size() == 1) {
-			
+			System.out.println("shop 1");
 			return list.get(0);
 		}
 		

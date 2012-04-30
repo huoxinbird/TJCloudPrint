@@ -29,19 +29,15 @@
     
 	<package name="user" namespace="/" extends="struts-default">
 	<interceptors>
-		<interceptor name="authInter" class="cn.edu.tongji.sse.action.UserSessionInterceptor" />
-		
-		
+		<interceptor name="sessionUser" class="cn.edu.tongji.sse.interceptor.UserSessionInterceptor" />
+				
 	
-		<interceptor-stack name="cookieStack">
+		<interceptor-stack name="sessionStack">
 			<interceptor-ref name="exception" />
 			<interceptor-ref name="servletConfig" />
-			<interceptor-ref name="authInter" />
+			<interceptor-ref name="sessionUser" />
 			<interceptor-ref name="modelDriven" />
-			<interceptor-ref name="cookie">
-				<param name="cookiesName">username, password, userId</param>
-				<param name="cookiesValue">*</param>
-			</interceptor-ref>
+			
 
 			<interceptor-ref name="actionMappingParams" />
 			<interceptor-ref name="params">
@@ -52,7 +48,7 @@
 		</interceptor-stack>
 	</interceptors>
 	
-		<default-interceptor-ref name="cookieStack"/>
+		<default-interceptor-ref name="sessionStack"/>
 	
 		<action name="login" class="cn.edu.tongji.sse.action.UserAction" method="login">
             <result type="redirectAction">home</result>
@@ -83,15 +79,14 @@
     <!-- Add packages here -->
     <package name="shop" namespace="/shop" extends="struts-default">
     <interceptors>
-		<interceptor-stack name="cookieStack">
+    	<interceptor name="sessionUser" class="cn.edu.tongji.sse.interceptor.UserSessionInterceptor" />
+    
+		<interceptor-stack name="sessionStack">
 			<interceptor-ref name="exception" />
 			<interceptor-ref name="servletConfig" />
-
+			<interceptor-ref name="sessionUser" />
 			<interceptor-ref name="modelDriven" />
-			<interceptor-ref name="cookie">
-				<param name="cookiesName">username, password, userId</param>
-				<param name="cookiesValue">*</param>
-			</interceptor-ref>
+			
 
 			<interceptor-ref name="actionMappingParams" />
 			<interceptor-ref name="params">
@@ -102,16 +97,23 @@
 		</interceptor-stack>
 	</interceptors>
     
-    <default-interceptor-ref name="cookieStack"/>
+    <default-interceptor-ref name="sessionStack"/>
     
 		<action name="list" class="cn.edu.tongji.sse.action.ShopAction" method="list">
             <result>/jsp/shopCenter.jsp</result>
-            <result name="input" type="redirectAction">login</result>
+            <result name="input" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">../user</param>
+			</result>
         </action>
 	
 		<action name="open" class="cn.edu.tongji.sse.action.ShopAction" method="open">
             <result type="redirectAction">list</result>
-            <result name="input" type="redirectAction">login</result>
+            
+            <result name="input" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">../user</param>
+			</result>
         </action>
 	
 	</package>
