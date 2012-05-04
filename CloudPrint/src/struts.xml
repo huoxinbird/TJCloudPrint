@@ -98,8 +98,11 @@
 	</interceptors>
     
     <default-interceptor-ref name="sessionStack"/>
+    	<action name="list" class="cn.edu.tongji.sse.action.ShopAction" method="list">
+    		<result>/jsp/guestCenter.jsp</result>
+    	</action>
     
-		<action name="list" class="cn.edu.tongji.sse.action.ShopAction" method="list">
+		<action name="home" class="cn.edu.tongji.sse.action.ShopAction" method="home">
             <result>/jsp/shopCenter.jsp</result>
             <result name="input" type="redirectAction">
     			<param name="actionName">login</param>
@@ -129,19 +132,56 @@
 	
 		<action name="token" class="cn.edu.tongji.sse.action.ShopAction" method="token">
 			<result name="success" type="redirectAction">
-    			list
+    			home
 			</result>
 			<result name="input" type="redirectAction">
     			<param name="actionName">login</param>
     			<param name="namespace">..</param>
 			</result>
 			<result name="error" type="redirectAction">
-    			list
+    			home
 			</result>
 		</action>
+		
+		
 	
 	</package>
     
+    <package name="task" namespace="/task" extends="struts-default">
+    <interceptors>
+    	<interceptor name="sessionUser" class="cn.edu.tongji.sse.interceptor.UserSessionInterceptor" />
     
+		<interceptor-stack name="sessionStack">
+			<interceptor-ref name="exception" />
+			<interceptor-ref name="servletConfig" />
+			<interceptor-ref name="sessionUser" />
+			<interceptor-ref name="modelDriven" />
+			
+
+			<interceptor-ref name="actionMappingParams" />
+			<interceptor-ref name="params">
+				<param name="excludeParams">dojo\..*,^struts\..*</param>
+			</interceptor-ref>
+			<interceptor-ref name="conversionError" />
+
+		</interceptor-stack>
+	</interceptors>
+    
+    <default-interceptor-ref name="sessionStack"/>
+    
+    	<action name="submit" class="cn.edu.tongji.sse.action.TaskAction" method="submit">
+			<result name="success" type="redirectAction">
+    			home
+			</result>
+			<result name="input" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">..</param>
+			</result>
+			<result name="error" type="redirectAction">
+    			home
+			</result>
+		</action>
+    
+    </package>
 
 </struts>

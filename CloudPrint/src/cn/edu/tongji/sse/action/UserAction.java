@@ -38,16 +38,7 @@ public class UserAction implements ServletRequestAware, SessionUser {
 	public String logout() {
 		System.out.println("UserAction.logout()");
 		
-//		//remove cookie
-//		Cookie usernameCookie = new Cookie(USERNAME, "");
-//		usernameCookie.setMaxAge(0);
-//		Cookie passwordCookie = new Cookie(PASSWORD, "");
-//		passwordCookie.setMaxAge(0);
-//		Cookie useridCookie = new Cookie(USERID, "");
-//		useridCookie.setMaxAge(0);
-//		response.addCookie(usernameCookie);
-//		response.addCookie(passwordCookie);
-//		response.addCookie(useridCookie);
+
 		
 		
 		request.getSession().removeAttribute(USERNAME);
@@ -72,10 +63,7 @@ public class UserAction implements ServletRequestAware, SessionUser {
 		
 		if (user != null) {			
 			
-//			//add cookie
-//			response.addCookie(new Cookie(USERNAME, this.user.getUsername()));
-//			response.addCookie(new Cookie(PASSWORD, this.user.getPassword()));			
-//			response.addCookie(new Cookie(USERID, this.user.getId().toString()));
+
 			
 			request.getSession().setAttribute(USERNAME, user.getUsername());
 			request.getSession().setAttribute(PASSWORD, user.getPassword());

@@ -1,5 +1,7 @@
 package cn.edu.tongji.sse.action;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.google.api.client.auth.oauth2.draft10.AccessTokenResponse;
@@ -28,7 +30,7 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 	private Shop shop;
 
 	private IShopService shopService;
-	
+	private List<Shop> openedShops;
 	
 	
 	//gcp
@@ -42,6 +44,13 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 	}
 	
 	public String list() {
+		
+		openedShops = shopService.getOpenedShops();
+		
+		return "success";
+	}
+	
+	public String home() {
 //		ValueStack stack = ActionContext.getContext().getValueStack();
 //		System.out.println(stack.peek().getClass());
 //		stack.pop();
@@ -180,5 +189,11 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 	public Client getClient() {
 		return this.client;
 	}
+
+	public List<Shop> getOpenedShops() {
+		return openedShops;
+	}
+
+
 	
 }

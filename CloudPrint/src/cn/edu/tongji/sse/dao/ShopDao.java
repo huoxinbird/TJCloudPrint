@@ -16,7 +16,23 @@ import cn.edu.tongji.sse.model.User;
 
 public class ShopDao extends HibernateDaoSupport implements IShopDao {
 
-	@Override
+	public List<Shop> getAuthorizedShops() {
+		List<Shop> list = getHibernateTemplate().execute(new HibernateCallback< List<Shop> > () {			
+			@SuppressWarnings("unchecked")
+			public List<Shop> doInHibernate(Session session) throws HibernateException {					
+				
+				List<Shop> result = session.createCriteria(Shop.class).add(
+						Restrictions.isNotNull("token")).list();				
+								
+				return result;
+			}
+		
+		});	
+		System.out.println("authorized shops "+ list.size());
+		
+		return list;
+	}
+	
 	public boolean addShopForUser(User u, Shop s) {
 		
 		s.setUser(u);

@@ -83,7 +83,7 @@ public class UserDao extends HibernateDaoSupport implements IUserDao {
 //		getHibernateTemplate().saveOrUpdate(s);
 		
 		getHibernateTemplate().saveOrUpdate(user);
-	
+		System.out.println("UserDao.insertUser() new id: "+user.getId());
 	}
 
 	

@@ -1,5 +1,7 @@
 package cn.edu.tongji.sse.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
@@ -15,6 +17,12 @@ public class ShopService implements IShopService {
 	
 	public void setTokenForShopOfUser(User u, String token) {
 		shopDao.setTokenForShopOfUser(u.getId(), token);
+	}
+	
+	public List<Shop> getOpenedShops() {
+		
+		
+		return shopDao.getAuthorizedShops();
 	}
 	
 	public Shop getShopForUser(User u) {
