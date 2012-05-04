@@ -41,9 +41,7 @@ public class UserSessionInterceptor extends AbstractInterceptor {
 
 			isValidUser = userService.isValid(u);
 			
-			if (!isValidUser) {
-				u = null;
-			}
+
 		}
 				
 
@@ -54,7 +52,7 @@ public class UserSessionInterceptor extends AbstractInterceptor {
 		Class actionClass = action.getClass();
 		
 		Method method = actionClass.getMethod("setSessionUser", parameterTypes);
-		if (method != null) {
+		if (method != null && isValidUser) {
 			method.invoke(action,u);
 		}
 

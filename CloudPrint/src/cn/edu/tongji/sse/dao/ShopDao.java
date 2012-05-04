@@ -9,6 +9,8 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 
+
+
 import cn.edu.tongji.sse.model.Shop;
 import cn.edu.tongji.sse.model.User;
 
@@ -24,7 +26,7 @@ public class ShopDao extends HibernateDaoSupport implements IShopDao {
 	}
 
 	
-	public Shop getShopWithUserId(final long id) {
+	public Shop getShopWithUserId(final Long id) {
 		
 		List<Shop> list = getHibernateTemplate().execute(new HibernateCallback< List<Shop> > () {			
 			@SuppressWarnings("unchecked")
@@ -45,6 +47,32 @@ public class ShopDao extends HibernateDaoSupport implements IShopDao {
 		}
 		
 		return null;
+	}
+
+
+	
+	public void setTokenForShopOfUser(final Long id, final String token) {
+		
+		getHibernateTemplate().execute(new HibernateCallback< List<Shop> > () {			
+			@SuppressWarnings("unchecked")
+			public List<Shop> doInHibernate(Session session) throws HibernateException {					
+				
+				List<Shop> result = session.createCriteria(Shop.class).add(
+						Restrictions.eq("user.id", id)).list();				
+				
+
+				if (result.size() == 1) {
+
+					Shop shop = result.get(0);
+					shop.setToken(token);
+
+				}
+				return result;
+			}
+		
+		});		
+		
+		
 	}
 
 }

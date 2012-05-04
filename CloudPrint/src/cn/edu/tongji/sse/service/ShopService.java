@@ -13,6 +13,10 @@ public class ShopService implements IShopService {
 
 	private IShopDao shopDao;
 	
+	public void setTokenForShopOfUser(User u, String token) {
+		shopDao.setTokenForShopOfUser(u.getId(), token);
+	}
+	
 	public Shop getShopForUser(User u) {
 		
 		return shopDao.getShopWithUserId(u.getId());

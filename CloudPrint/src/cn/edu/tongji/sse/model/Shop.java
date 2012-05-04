@@ -5,6 +5,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@org.hibernate.annotations.Entity(
+		dynamicUpdate = true
+)
 public class Shop implements Serializable {
 
 	private static final long serialVersionUID = -2605903814455581609L;
@@ -13,7 +16,7 @@ public class Shop implements Serializable {
 	private String name;
 	
 	
-//	private String userId;
+	private String token;
 	
 	private User user;
 	
@@ -43,13 +46,13 @@ public class Shop implements Serializable {
 		this.user = user;
 	}
 	
-//	@Column(name="user_id")
-//	public String getUserId() {
-//		return userId;
-//	}
-//	public void setUserId(String userId) {
-//		this.userId = userId;
-//	}
+	
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 
 	

@@ -103,7 +103,7 @@
             <result>/jsp/shopCenter.jsp</result>
             <result name="input" type="redirectAction">
     			<param name="actionName">login</param>
-    			<param name="namespace">../user</param>
+    			<param name="namespace">..</param>
 			</result>
         </action>
 	
@@ -112,9 +112,33 @@
             
             <result name="input" type="redirectAction">
     			<param name="actionName">login</param>
-    			<param name="namespace">../user</param>
+    			<param name="namespace">..</param>
 			</result>
         </action>
+        
+        <action name="auth" class="cn.edu.tongji.sse.action.ShopAction" method="auth">
+            <result type="redirect">
+            	https://accounts.google.com/o/oauth2/auth?response_type=code&amp;scope=https://www.googleapis.com/auth/cloudprint&amp;redirect_uri=http://localhost:8080/CloudPrint/shop/token&amp;client_id=${client.clientId}&amp;approval_prompt=force              
+            </result>
+            
+            <result name="input" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">..</param>
+			</result>
+        </action>
+	
+		<action name="token" class="cn.edu.tongji.sse.action.ShopAction" method="token">
+			<result name="success" type="redirectAction">
+    			list
+			</result>
+			<result name="input" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">..</param>
+			</result>
+			<result name="error" type="redirectAction">
+    			list
+			</result>
+		</action>
 	
 	</package>
     

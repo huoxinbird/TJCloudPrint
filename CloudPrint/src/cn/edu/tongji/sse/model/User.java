@@ -6,6 +6,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@org.hibernate.annotations.Entity(
+		dynamicUpdate = true
+)
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -6925661679308746598L;

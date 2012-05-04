@@ -5,5 +5,6 @@ import cn.edu.tongji.sse.model.User;
 
 public interface IShopDao {
 	public boolean addShopForUser(User u, Shop s);
-	public Shop getShopWithUserId(long id);
+	public Shop getShopWithUserId(Long id);
+	public void setTokenForShopOfUser(final Long id, String token);
 }
