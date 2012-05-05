@@ -51,7 +51,7 @@ public class TaskService implements ITaskService {
 		user.setId(userId);
 		t.setUser(user);
 		
-		
+		t.setState((short)1);
 		
 		return taskDao.addTask(t);
 	}

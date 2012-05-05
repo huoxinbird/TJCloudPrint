@@ -3,6 +3,7 @@ package cn.edu.tongji.sse.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
-
+@Entity
 public class Task implements Serializable {
 
 	private static final long serialVersionUID = -366840727953692960L;
