@@ -45,6 +45,11 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 			
 	</bean>
+	
+	<bean id="taskDAO" class="cn.edu.tongji.sse.dao.TaskDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+			
+	</bean>
 
 
 </beans>

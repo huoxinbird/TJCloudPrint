@@ -12,7 +12,14 @@ welcome <s:property value="#session.username" /> <br>
 
 <s:iterator value="openedShops" status="status">
 <div>
-<s:property value="name" />
+
+shopId:${shopId}
+
+
+
+<a href="/CloudPrint/task/submit?shopId=${id}"><s:property value="name" /></a>
+
+
 </div>
         
 </s:iterator>

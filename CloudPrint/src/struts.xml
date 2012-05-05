@@ -170,13 +170,24 @@
     <default-interceptor-ref name="sessionStack"/>
     
     	<action name="submit" class="cn.edu.tongji.sse.action.TaskAction" method="submit">
-			<result name="success" type="redirectAction">
-    			home
+    		<interceptor-ref name="fileUpload">
+        		<param name="maximumSize">1000000</param>
+        		<param name="allowedTypes">
+            		application/msword
+        		</param>        		
+    		</interceptor-ref>
+    		<interceptor-ref name="sessionStack"/>
+    	
+			
+    			
+			<result type="redirectAction">
+    			<param name="actionName">list</param>
+    			<param name="namespace">../shop</param>
 			</result>
-			<result name="input" type="redirectAction">
-    			<param name="actionName">login</param>
-    			<param name="namespace">..</param>
-			</result>
+			
+			<result name="input">/jsp/submit.jsp</result>
+    			
+			
 			<result name="error" type="redirectAction">
     			home
 			</result>

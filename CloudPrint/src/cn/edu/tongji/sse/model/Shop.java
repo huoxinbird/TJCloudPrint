@@ -29,6 +29,12 @@ public class Shop implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	@Transient
+	public String getShopId() {
+		return id.toString();
+	}
+
+	
 	public String getName() {
 		return name;
 	}

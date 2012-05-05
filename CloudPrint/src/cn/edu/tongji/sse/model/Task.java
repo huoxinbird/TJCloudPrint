@@ -18,9 +18,11 @@ public class Task implements Serializable {
 	private Long id;
 	private User user;
 	private Shop shop;
-	private Integer state;
+	private Short state;
 	private Date createDate;
 	private Date finishDate;
+	private String fileName;
+	private Short fileType;
 	
 	
 	@Id
@@ -49,10 +51,10 @@ public class Task implements Serializable {
 	public void setShop(Shop shop) {
 		this.shop = shop;
 	}
-	public Integer getState() {
+	public Short getState() {
 		return state;
 	}
-	public void setState(Integer state) {
+	public void setState(Short state) {
 		this.state = state;
 	}
 	public Date getCreateDate() {
@@ -69,6 +71,18 @@ public class Task implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public Short getFileType() {
+		return fileType;
+	}
+	public void setFileType(Short fileType) {
+		this.fileType = fileType;
 	}
 	
 	

@@ -1,5 +1,7 @@
 package cn.edu.tongji.sse.dao;
 
-public interface ITaskDao {
+import cn.edu.tongji.sse.model.Task;
 
+public interface ITaskDao {
+	public Long addTask(Task t);
 }

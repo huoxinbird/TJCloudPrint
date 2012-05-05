@@ -8,9 +8,10 @@
 </head>
 <body>
 
-<form action="/CloudPrint/" enctype="multipart/form-data" method="post">
+<form action="/CloudPrint/task/submit" enctype="multipart/form-data" method="post">
 <input type="file" name="doc" />
 <input type="submit" value="Upload"/>
+<input type="hidden" name="shopId" value="${shopId}" />
 </form>
 
 </body>
