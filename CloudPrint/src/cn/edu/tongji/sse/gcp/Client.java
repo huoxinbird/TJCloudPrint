@@ -3,15 +3,8 @@ package cn.edu.tongji.sse.gcp;
 public class Client {
 	private String clientId;
 	private String clientSecret;
-
-	private String token;
+	private String redirectUrl;
 	
-	public synchronized String getToken() {
-		return token;
-	}
-	public synchronized void setToken(String token) {
-		this.token = token;
-	}
 	public String getClientId() {
 		return clientId;
 	}
@@ -23,6 +16,12 @@ public class Client {
 	}
 	public void setClientSecret(String clientSecret) {
 		this.clientSecret = clientSecret;
+	}
+	public String getRedirectUrl() {
+		return redirectUrl;
+	}
+	public void setRedirectUrl(String redirectUrl) {
+		this.redirectUrl = redirectUrl;
 	}
 
 	

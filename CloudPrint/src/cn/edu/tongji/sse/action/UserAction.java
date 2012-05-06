@@ -2,6 +2,8 @@ package cn.edu.tongji.sse.action;
 
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,36 +13,33 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.opensymphony.xwork2.ModelDriven;
+
 import cn.edu.tongji.sse.interceptor.SessionUser;
+import cn.edu.tongji.sse.model.Shop;
 import cn.edu.tongji.sse.model.User;
+import cn.edu.tongji.sse.service.IShopService;
 import cn.edu.tongji.sse.service.IUserService;
 
-public class UserAction implements ServletRequestAware, SessionUser {
+public class UserAction implements ServletRequestAware, SessionUser, ModelDriven<User> {
 			
-	private IUserService userService;
+	private IUserService userService;	
+	private IShopService shopService;
 	private User user;
-	
-	private String username;
-	private String password;
-	
-	
+	private List<Shop> openedShops;	
 	private HttpServletRequest request;		
 	
 	final static String USERNAME = "username";
 	final static String PASSWORD = "password";
 	final static String USERID = "userId";
 	
-	@Resource
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
+
+	
+
 
 	public String logout() {
 		System.out.println("UserAction.logout()");
-		
-
-		
-		
+						
 		request.getSession().removeAttribute(USERNAME);
 		request.getSession().removeAttribute(PASSWORD);
 		request.getSession().removeAttribute(USERID);
@@ -59,11 +58,9 @@ public class UserAction implements ServletRequestAware, SessionUser {
 			return "input";
 		}
 				
-		user = userService.login(username,password);
+		user = userService.login(user.getUsername(),user.getPassword());
 		
-		if (user != null) {			
-			
-
+		if (user != null) {						
 			
 			request.getSession().setAttribute(USERNAME, user.getUsername());
 			request.getSession().setAttribute(PASSWORD, user.getPassword());
@@ -84,7 +81,7 @@ public class UserAction implements ServletRequestAware, SessionUser {
 		}
 		
 		
-		if (userService.register(username,password)) {
+		if (userService.register(user.getUsername(),user.getPassword())) {
 			return "success";
 		}
 		
@@ -94,15 +91,12 @@ public class UserAction implements ServletRequestAware, SessionUser {
 	
 	
 	public String home() {
+				
 		
-		if (user != null){
-			
-			return "success";
-		}
+		openedShops = shopService.getOpenedShops();
 		
-		return "input";
+		return "success";
 	}
-
 	
 
 
@@ -111,34 +105,31 @@ public class UserAction implements ServletRequestAware, SessionUser {
 		this.request = request;
 	}
 
-	public User getUser() {
-		return user;
-	}
 
 	public void setSessionUser(User u) {
 		this.user = u;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public List<Shop> getOpenedShops() {
+		return openedShops;
 	}
 
 	
+	public User getModel() {
+		user = new User();
+		
+		return user;
+	}
 
 
-
-
+	@Resource
+	public void setShopService(IShopService shopService) {
+		this.shopService = shopService;
+	}
+	
+	@Resource
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
 
 }

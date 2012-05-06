@@ -6,68 +6,47 @@
 <struts>
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="false" />
+    <constant name="struts.devMode" value="true" />
 	<constant name="struts.objectFactory" value="spring" />
 
-    <package name="admin" namespace="/admin" extends="struts-default">
-		<action name="authorize" class="cn.edu.tongji.sse.action.AdminAction" method="authorize">
-            <result>/index.html</result>
-            <result name="error">/index.html</result>
-        </action>
-        
-        <action name="login" class="cn.edu.tongji.sse.action.AdminAction" method="login">
-        	<result name="success" type="redirect">    
-            
-              https://accounts.google.com/o/oauth2/auth?response_type=code&amp;scope=https://www.googleapis.com/auth/cloudprint&amp;redirect_uri=http://localhost:8080/CloudPrint/admin/authorize&amp;client_id=${client.clientId}&amp;approval_prompt=force
-              
-  
-            </result>
-        </action>
-        
+    
+    
+    <package name="my-default" extends="struts-default" abstract="true">
+    	<interceptors>
+    		<interceptor name="sessionUser" class="cn.edu.tongji.sse.interceptor.UserSessionInterceptor" />
+    		<interceptor-stack name="sessionUserStack">
+                <interceptor-ref name="sessionUser"/>
+                <interceptor-ref name="basicStack"/>
+        	</interceptor-stack>
+    	</interceptors>
+    	<default-interceptor-ref name="sessionUserStack"/>
     </package>
     
     
-	<package name="user" namespace="/" extends="struts-default">
-	<interceptors>
-		<interceptor name="sessionUser" class="cn.edu.tongji.sse.interceptor.UserSessionInterceptor" />
-				
-	
-		<interceptor-stack name="sessionStack">
-			<interceptor-ref name="exception" />
-			<interceptor-ref name="servletConfig" />
-			<interceptor-ref name="sessionUser" />
-			<interceptor-ref name="modelDriven" />
-			
-
-			<interceptor-ref name="actionMappingParams" />
-			<interceptor-ref name="params">
-				<param name="excludeParams">dojo\..*,^struts\..*</param>
-			</interceptor-ref>
-			<interceptor-ref name="conversionError" />
-
-		</interceptor-stack>
-	</interceptors>
-	
-		<default-interceptor-ref name="sessionStack"/>
+    
+	<package name="user" namespace="/" extends="my-default">
 	
 		<action name="login" class="cn.edu.tongji.sse.action.UserAction" method="login">
+			<interceptor-ref name="modelDrivenStack"/>
             <result type="redirectAction">home</result>
-            <result name="input">/jsp/login.jsp</result>
+            <result name="login">/jsp/login.jsp</result>
         </action>
 	
 		<action name="register" class="cn.edu.tongji.sse.action.UserAction" method="register">
-            <result type="redirectAction">home</result>
-            <result name="input">/jsp/login.jsp</result>
+			<interceptor-ref name="modelDrivenStack"/>
+            <result type="redirectAction">login</result>
+            <result name="login">/jsp/login.jsp</result>
         </action>
         
         <action name="logout" class="cn.edu.tongji.sse.action.UserAction" method="logout">
+        	<interceptor-ref name="basicStack"/>
             <result type="redirectAction">login</result>
             
         </action> 
         
         <action name="home" class="cn.edu.tongji.sse.action.UserAction" method="home">
             <result>/jsp/home.jsp</result>
-            <result name="input" type="redirectAction">login</result>
+            <result name="login" type="redirectAction">login</result>
         </action> 
 	
 		
@@ -76,44 +55,26 @@
     
 
 
-    <!-- Add packages here -->
-    <package name="shop" namespace="/shop" extends="struts-default">
-    <interceptors>
-    	<interceptor name="sessionUser" class="cn.edu.tongji.sse.interceptor.UserSessionInterceptor" />
     
-		<interceptor-stack name="sessionStack">
-			<interceptor-ref name="exception" />
-			<interceptor-ref name="servletConfig" />
-			<interceptor-ref name="sessionUser" />
-			<interceptor-ref name="modelDriven" />
-			
+    <package name="shop" namespace="/shop" extends="my-default">
 
-			<interceptor-ref name="actionMappingParams" />
-			<interceptor-ref name="params">
-				<param name="excludeParams">dojo\..*,^struts\..*</param>
-			</interceptor-ref>
-			<interceptor-ref name="conversionError" />
 
-		</interceptor-stack>
-	</interceptors>
-    
-    <default-interceptor-ref name="sessionStack"/>
-    	<action name="list" class="cn.edu.tongji.sse.action.ShopAction" method="list">
-    		<result>/jsp/guestCenter.jsp</result>
-    	</action>
+
     
 		<action name="home" class="cn.edu.tongji.sse.action.ShopAction" method="home">
             <result>/jsp/shopCenter.jsp</result>
-            <result name="input" type="redirectAction">
+            <result name="login" type="redirectAction">
     			<param name="actionName">login</param>
     			<param name="namespace">..</param>
 			</result>
         </action>
 	
 		<action name="open" class="cn.edu.tongji.sse.action.ShopAction" method="open">
-            <result type="redirectAction">list</result>
+			<interceptor-ref name="sessionUser"/>
+			<interceptor-ref name="modelDrivenStack"/>
+            <result type="redirectAction">home</result>
             
-            <result name="input" type="redirectAction">
+            <result name="login" type="redirectAction">
     			<param name="actionName">login</param>
     			<param name="namespace">..</param>
 			</result>
@@ -121,10 +82,10 @@
         
         <action name="auth" class="cn.edu.tongji.sse.action.ShopAction" method="auth">
             <result type="redirect">
-            	https://accounts.google.com/o/oauth2/auth?response_type=code&amp;scope=https://www.googleapis.com/auth/cloudprint&amp;redirect_uri=http://localhost:8080/CloudPrint/shop/token&amp;client_id=${client.clientId}&amp;approval_prompt=force              
+            	https://accounts.google.com/o/oauth2/auth?response_type=code&amp;scope=https://www.googleapis.com/auth/cloudprint&amp;redirect_uri=${client.redirectUrl}&amp;client_id=${client.clientId}&amp;approval_prompt=force              
             </result>
             
-            <result name="input" type="redirectAction">
+            <result name="login" type="redirectAction">
     			<param name="actionName">login</param>
     			<param name="namespace">..</param>
 			</result>
@@ -134,7 +95,7 @@
 			<result name="success" type="redirectAction">
     			home
 			</result>
-			<result name="input" type="redirectAction">
+			<result name="login" type="redirectAction">
     			<param name="actionName">login</param>
     			<param name="namespace">..</param>
 			</result>
@@ -146,28 +107,25 @@
 		
 	
 	</package>
+	
+	
+	
+	<package name="guest" namespace="/guest" extends="my-default">
+		<action name="home" class="cn.edu.tongji.sse.action.GuestAction" method="home">
+			<result>/jsp/guestCenter.jsp</result>
+            <result name="login" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">..</param>
+			</result>
+		</action>
+		
+		
+	</package>
+	
+	
     
-    <package name="task" namespace="/task" extends="struts-default">
-    <interceptors>
-    	<interceptor name="sessionUser" class="cn.edu.tongji.sse.interceptor.UserSessionInterceptor" />
-    
-		<interceptor-stack name="sessionStack">
-			<interceptor-ref name="exception" />
-			<interceptor-ref name="servletConfig" />
-			<interceptor-ref name="sessionUser" />
-			<interceptor-ref name="modelDriven" />
-			
+    <package name="task" namespace="/task" extends="my-default">
 
-			<interceptor-ref name="actionMappingParams" />
-			<interceptor-ref name="params">
-				<param name="excludeParams">dojo\..*,^struts\..*</param>
-			</interceptor-ref>
-			<interceptor-ref name="conversionError" />
-
-		</interceptor-stack>
-	</interceptors>
-    
-    <default-interceptor-ref name="sessionStack"/>
     
     	<action name="submit" class="cn.edu.tongji.sse.action.TaskAction" method="submit">
     		<interceptor-ref name="fileUpload">
@@ -176,21 +134,23 @@
             		application/msword
         		</param>        		
     		</interceptor-ref>
-    		<interceptor-ref name="sessionStack"/>
+    		<interceptor-ref name="sessionUserStack"/>
     	
-			
-    			
-			<result type="redirectAction">
-    			<param name="actionName">list</param>
-    			<param name="namespace">../shop</param>
-			</result>
-			
 			<result name="input">/jsp/submit.jsp</result>
     			
-			
-			<result name="error" type="redirectAction">
-    			home
+			<result type="redirectAction">
+    			<param name="actionName">home</param>
+    			<param name="namespace">../guest</param>
 			</result>
+			
+			<result name="login" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">..</param>
+			</result>
+				
+			
+			
+			
 		</action>
     
     </package>

@@ -1,6 +1,7 @@
 package cn.edu.tongji.sse.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -62,6 +64,7 @@ public class Task implements Serializable {
 		return createDate;
 	}
 	public void setCreateDate(Date createDate) {
+		
 		this.createDate = createDate;
 	}
 	public Date getFinishDate() {
@@ -86,6 +89,28 @@ public class Task implements Serializable {
 		this.fileType = fileType;
 	}
 	
+	@Transient
+	public String getStateName() {
+		String result = null;
+		if (state == (short)0) {
+			result = "error";
+		}
+		else if (state == (short)1) {
+			result = "pending";
+		}
+		else if (state == (short)2) {
+			result = "printing";
+		}
+		else if (state == (short)1) {
+			result = "done";
+		}
+		return result;
+	}
 	
+	@Transient
+	public String getCreateDateString() {
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return dateformat.format(createDate);
+	}
 	
 }

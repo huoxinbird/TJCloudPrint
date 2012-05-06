@@ -9,7 +9,7 @@
 </head>
 <body>
 	welcome,
-	<s:property value="sessionUser.username" />
+	<s:property value="#session.username" />
 	<br>
 
 
@@ -38,7 +38,32 @@ shop name:	<s:property value="shop.name" />
 		</s:if>
 		<s:else>
 token: <s:property value="shop.token" />
+
+
+
+
+<div>
+<br>
+<s:iterator value="tasks" status="status">
+<div>
+fileName: <s:property value="fileName" /> <br>
+state: <s:property value="stateName" /> <br>
+createDate: <s:property value="createDateString" /> <br><br>
+
+</div>
+
+</s:iterator>
+
+</div>
+
 		</s:else>
+
+
+
+
+
+
+
 
 	</s:else> 
 

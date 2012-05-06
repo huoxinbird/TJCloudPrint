@@ -55,6 +55,9 @@ public class UserSessionInterceptor extends AbstractInterceptor {
 		if (method != null && isValidUser) {
 			method.invoke(action,u);
 		}
+		else {
+			return "login";
+		}
 
 		
 		

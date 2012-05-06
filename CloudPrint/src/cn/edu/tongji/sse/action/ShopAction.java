@@ -17,6 +17,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import cn.edu.tongji.sse.gcp.Client;
 import cn.edu.tongji.sse.interceptor.SessionUser;
 import cn.edu.tongji.sse.model.Shop;
+import cn.edu.tongji.sse.model.Task;
 import cn.edu.tongji.sse.model.User;
 import cn.edu.tongji.sse.service.IShopService;
 
@@ -31,17 +32,14 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 
 	private IShopService shopService;
 	private List<Shop> openedShops;
-	
+	private List<Task> tasks;
 	
 	//gcp
 	private String code;
 	private String error;
 	private Client client;
 	
-	@Resource
-	public void setShopService(IShopService shopService) {
-		this.shopService = shopService;
-	}
+
 	
 	public String list() {
 		
@@ -50,32 +48,22 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 		return "success";
 	}
 	
-	public String home() {
-//		ValueStack stack = ActionContext.getContext().getValueStack();
-//		System.out.println(stack.peek().getClass());
-//		stack.pop();
-//		System.out.println(stack.peek().getClass());
-		
-		if (user == null){
-			return "input";
-		}
-		
-		
-		
+	public String home() {		
+				
 		this.shop = shopService.getShopForUser(user);
 		if (shop == null) {
 			System.out.println("shop null");
 		}
+		else {
+			this.tasks = shopService.getTasksForShop(shop);
+		}
 		
-		System.out.println("list username:"+user.getUsername());
+		
+		
 		return "success";
 	}
 	
 	public String open() {
-		if (user == null){
-			return "input";
-		}
-		
 		
 		if (shopService.addShopForUser(user, shop))
 		{
@@ -87,17 +75,13 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 	
 	
 	public String auth() {
-		if (user == null){
-			return "input";
-		}
+
 		
 		return "success";
 	}
 	
 	public String token() {
-		if (user == null){
-			return "input";
-		}
+
 						
 		if (error != null || code == null) {
 			// user deny
@@ -115,19 +99,25 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 		return "error";
 	}
 
-	public User getSessionUser() {
-		//System.out.println("ShopAction.getUser()");
-		//System.out.println("get username:"+user.getUsername());
-		
-		return user;
-	}
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public Shop getShop() {
 		if (shop == null) {
 			System.out.println("get shop null");
-		}
-		
+		}		
 		
 		
 		return shop;
@@ -141,7 +131,7 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 		this.user = user;
 		
 	}
-
+	
 	
 	public Shop getModel() {
 		this.shop = new Shop();
@@ -165,7 +155,7 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 					new NetHttpTransport(), new JacksonFactory(),
 					"https://accounts.google.com/o/oauth2/token",
 					client.getClientId(), client.getClientSecret(), this.code,
-					"http://localhost:8080/CloudPrint/shop/token");
+					client.getRedirectUrl());
 			AccessTokenResponse response = request.execute();
 			System.out.println("Access token: " + response.accessToken);
 
@@ -194,6 +184,15 @@ public class ShopAction implements SessionUser, ModelDriven<Shop> {
 		return openedShops;
 	}
 
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	
+	@Resource
+	public void setShopService(IShopService shopService) {
+		this.shopService = shopService;
+	}
 
 	
 }

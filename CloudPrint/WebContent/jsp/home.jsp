@@ -8,12 +8,28 @@
 <title>home</title>
 </head>
 <body>
-welcome, <s:property value="user.username"/> !
+welcome, <s:property value="#session.username"/> !
 
 <a href="/CloudPrint/shop/home">我是打印店老板</a>
-<a href="/CloudPrint/shop/list">我是打印店顾客</a>
+<a href="/CloudPrint/guest/home">我是打印店顾客</a>
 
 <a href="/CloudPrint/logout">登出</a>
+
+
+<div>
+
+<s:iterator value="openedShops" status="status">
+<div>
+
+<a href="/CloudPrint/task/submit?shopId=${id}"><s:property value="name" /></a>
+
+</div>
+        
+</s:iterator>
+
+
+</div>
+
 
 </body>
 </html>

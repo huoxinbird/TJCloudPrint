@@ -1,5 +1,7 @@
 package cn.edu.tongji.sse.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 
@@ -56,4 +58,7 @@ public class TaskService implements ITaskService {
 		return taskDao.addTask(t);
 	}
 	
+	public List<Task> getTasksOfUser(User u) {
+		return taskDao.getTasksOfUser(u.getId());
+	}
 }

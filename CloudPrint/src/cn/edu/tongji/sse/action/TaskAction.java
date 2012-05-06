@@ -1,17 +1,16 @@
 package cn.edu.tongji.sse.action;
 
 import java.io.File;
-import java.util.Map;
+
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.RequestAware;
+
 import org.apache.struts2.interceptor.ServletRequestAware;
 
-import cn.edu.tongji.sse.model.Task;
 import cn.edu.tongji.sse.model.User;
 import cn.edu.tongji.sse.service.ITaskService;
 
@@ -34,9 +33,6 @@ public class TaskAction implements ServletRequestAware {
 	}
 	
 	public String submit() {
-		if (user == null){
-			return "input";
-		}
 		
 		if (!isPostMethod()) {
 			return "input";

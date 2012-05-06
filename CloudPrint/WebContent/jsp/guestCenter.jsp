@@ -8,17 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-welcome <s:property value="#session.username" /> <br>
+welcome, <s:property value="#session.username" />  
+<a href="../home">主页</a> <br>
 
-<s:iterator value="openedShops" status="status">
+<s:iterator value="guestTasks" status="status">
 <div>
 
-shopId:${shopId}
-
-
-
-<a href="/CloudPrint/task/submit?shopId=${id}"><s:property value="name" /></a>
-
+fileName: <s:property value="fileName" /> <br>
+state: <s:property value="stateName" /> <br>
+createDate: <s:property value="createDateString" /> <br><br>
 
 </div>
         
