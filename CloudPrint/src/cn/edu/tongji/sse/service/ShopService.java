@@ -18,8 +18,8 @@ public class ShopService implements IShopService {
 	private IShopDao shopDao;
 	private ITaskDao taskDao;
 	
-	public void setTokenForShopOfUser(User u, String token) {
-		shopDao.setTokenForShopOfUser(u.getId(), token);
+	public void setTokenForShopOfUser(User u, String token, String refreshToken) {
+		shopDao.setTokenForShopOfUser(u.getId(), token, refreshToken);
 	}
 	
 	public List<Shop> getOpenedShops() {
@@ -53,6 +53,11 @@ public class ShopService implements IShopService {
 		return shopDao.addShopForUser(u, s);
 		
 		
+	}
+
+	
+	public Shop getShop(Long shopId) {
+		return shopDao.getShop(shopId);
 	}
 
 	

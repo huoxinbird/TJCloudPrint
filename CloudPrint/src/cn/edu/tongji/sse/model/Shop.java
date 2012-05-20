@@ -17,6 +17,7 @@ public class Shop implements Serializable {
 	
 	
 	private String token;
+	private String refresh;
 	
 	private User user;
 	
@@ -58,6 +59,12 @@ public class Shop implements Serializable {
 	}
 	public void setToken(String token) {
 		this.token = token;
+	}
+	public String getRefresh() {
+		return refresh;
+	}
+	public void setRefresh(String refresh) {
+		this.refresh = refresh;
 	}
 
 

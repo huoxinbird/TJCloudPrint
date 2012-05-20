@@ -21,7 +21,7 @@ welcome, <s:property value="#session.username"/> !
 <s:iterator value="openedShops" status="status">
 <div>
 
-<a href="/CloudPrint/task/submit?shopId=${id}"><s:property value="name" /></a>
+<a href="/CloudPrint/shopDetail?shopId=${id}"><s:property value="name" /></a>
 
 </div>
         

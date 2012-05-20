@@ -67,7 +67,7 @@ public class ShopDao extends HibernateDaoSupport implements IShopDao {
 
 
 	
-	public void setTokenForShopOfUser(final Long id, final String token) {
+	public void setTokenForShopOfUser(final Long id, final String token, final String refreshToken) {
 		
 		getHibernateTemplate().execute(new HibernateCallback< List<Shop> > () {			
 			@SuppressWarnings("unchecked")
@@ -81,12 +81,23 @@ public class ShopDao extends HibernateDaoSupport implements IShopDao {
 
 					Shop shop = result.get(0);
 					shop.setToken(token);
+					if (refreshToken != null) {
+						shop.setRefresh(refreshToken);
+					}
 
 				}
 				return result;
 			}
 		
 		});		
+		
+		
+	}
+
+	
+	public Shop getShop(Long shopId) {
+		return getHibernateTemplate().get(Shop.class,
+				shopId);
 		
 		
 	}

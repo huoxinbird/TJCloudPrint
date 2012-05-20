@@ -9,7 +9,8 @@ import cn.edu.tongji.sse.model.User;
 public interface IShopService {
 	public Shop getShopForUser(User u);
 	public boolean addShopForUser(User u, Shop s);
-	public void setTokenForShopOfUser(User u, String token);
+	public void setTokenForShopOfUser(User u, String token, String refreshToken);
 	public List<Shop> getOpenedShops();
 	public List<Task> getTasksForShop(Shop s);
+	public Shop getShop(Long shopId);
 }

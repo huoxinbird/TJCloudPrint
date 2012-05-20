@@ -61,4 +61,8 @@ public class TaskService implements ITaskService {
 	public List<Task> getTasksOfUser(User u) {
 		return taskDao.getTasksOfUser(u.getId());
 	}
+	
+	public Task getTask(Long taskId) {
+		return taskDao.getTask(taskId);
+	}
 }

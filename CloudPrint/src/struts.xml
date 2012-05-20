@@ -29,7 +29,7 @@
 		<action name="login" class="cn.edu.tongji.sse.action.UserAction" method="login">
 			<interceptor-ref name="modelDrivenStack"/>
             <result type="redirectAction">home</result>
-            <result name="login">/jsp/login.jsp</result>
+            <result name="input">/jsp/login.jsp</result>
         </action>
 	
 		<action name="register" class="cn.edu.tongji.sse.action.UserAction" method="register">
@@ -49,7 +49,10 @@
             <result name="login" type="redirectAction">login</result>
         </action> 
 	
-		
+		<action name="shopDetail" class="cn.edu.tongji.sse.action.UserAction" method="shopDetail">
+            <result>/jsp/shopDetail.jsp</result>
+            <result name="login" type="redirectAction">login</result>
+        </action>
 	</package>
     
     
@@ -57,9 +60,6 @@
 
     
     <package name="shop" namespace="/shop" extends="my-default">
-
-
-
     
 		<action name="home" class="cn.edu.tongji.sse.action.ShopAction" method="home">
             <result>/jsp/shopCenter.jsp</result>
@@ -82,7 +82,7 @@
         
         <action name="auth" class="cn.edu.tongji.sse.action.ShopAction" method="auth">
             <result type="redirect">
-            	https://accounts.google.com/o/oauth2/auth?response_type=code&amp;scope=https://www.googleapis.com/auth/cloudprint&amp;redirect_uri=${client.redirectUrl}&amp;client_id=${client.clientId}&amp;approval_prompt=force              
+            	https://accounts.google.com/o/oauth2/auth?response_type=code&amp;scope=https://www.googleapis.com/auth/cloudprint&amp;redirect_uri=${client.redirectUrl}&amp;client_id=${client.clientId}&amp;access_type=offline  
             </result>
             
             <result name="login" type="redirectAction">
@@ -104,7 +104,23 @@
 			</result>
 		</action>
 		
+		<action name="selectprinter" class="cn.edu.tongji.sse.action.ShopAction" method="selectprinter">
+			<result name="success">/jsp/printer.jsp</result>
+			<result name="login" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">..</param>
+			</result>
+			
+		</action>
 		
+		<action name="printsettings" class="cn.edu.tongji.sse.action.ShopAction" method="printsettings">
+			
+			<result name="success" type="redirectAction">
+    			<param name="actionName">login</param>
+    			<param name="namespace">..</param>
+			</result>
+			
+		</action>
 	
 	</package>
 	

@@ -31,11 +31,11 @@
 shop name:	<s:property value="shop.name" />
 		<br>
 
-		<s:if test="shop.token == null">
+		<%-- <s:if test="shop.token == null"> --%>
 
 			<a href="/CloudPrint/shop/auth">Authorize</a>
 
-		</s:if>
+		<%-- </s:if> --%>
 		<s:else>
 token: <s:property value="shop.token" />
 
@@ -49,7 +49,7 @@ token: <s:property value="shop.token" />
 fileName: <s:property value="fileName" /> <br>
 state: <s:property value="stateName" /> <br>
 createDate: <s:property value="createDateString" /> <br><br>
-
+<a href="../shop/selectprinter?taskId=${id}">打印</a>
 </div>
 
 </s:iterator>

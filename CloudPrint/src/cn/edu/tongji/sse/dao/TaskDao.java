@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 
 import cn.edu.tongji.sse.model.Task;
+import cn.edu.tongji.sse.model.User;
 
 public class TaskDao extends HibernateDaoSupport implements ITaskDao {
 	public Long addTask(Task t) {
@@ -59,4 +60,14 @@ public class TaskDao extends HibernateDaoSupport implements ITaskDao {
 		
 		return list;
 	}
+	
+	
+	public Task getTask(Long taskId) {
+		
+		return getHibernateTemplate().get(Task.class,
+				taskId);
+		
+		
+	}
+	
 }

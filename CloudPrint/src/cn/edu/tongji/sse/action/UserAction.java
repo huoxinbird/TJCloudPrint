@@ -28,6 +28,8 @@ public class UserAction implements ServletRequestAware, SessionUser, ModelDriven
 	private User user;
 	private List<Shop> openedShops;	
 	private HttpServletRequest request;		
+	private Long shopId;
+	private Shop shop;
 	
 	final static String USERNAME = "username";
 	final static String PASSWORD = "password";
@@ -98,7 +100,11 @@ public class UserAction implements ServletRequestAware, SessionUser, ModelDriven
 		return "success";
 	}
 	
-
+	public String shopDetail() {
+		shop = shopService.getShop(shopId);
+		
+		return "success";
+	}
 
 	
 	public void setServletRequest(HttpServletRequest request) {
@@ -130,6 +136,22 @@ public class UserAction implements ServletRequestAware, SessionUser, ModelDriven
 	@Resource
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
+	}
+
+	public Long getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Long shopId) {
+		this.shopId = shopId;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 
 }

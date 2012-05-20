@@ -9,4 +9,5 @@ public interface ITaskDao {
 	
 	public List<Task> getTasksForShop(Long shopId);
 	public List<Task> getTasksOfUser(Long userId);
+	public Task getTask(Long taskId);
 }
