@@ -170,8 +170,10 @@ public class GCPUtil implements IGCPUtil {
 			System.out.println(response.getStatusLine());
 			
 			if (entity != null) {
+				System.out.println("entity != null");
+				
 				InputStream in = entity.getContent();
-//				
+				System.out.println("getContent");
 //				StringBuffer   out   =   new   StringBuffer();
 //		        byte[]   b   =   new   byte[4096];
 //		        for   (int   n;   (n   =   in.read(b))   !=   -1;)   {
@@ -184,7 +186,7 @@ public class GCPUtil implements IGCPUtil {
 			}
 		}
 		catch (Exception e) {
-			
+			System.out.println("null e");
 			result = null;
 		}
 		finally {

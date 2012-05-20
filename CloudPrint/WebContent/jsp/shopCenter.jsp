@@ -31,11 +31,11 @@
 shop name:	<s:property value="shop.name" />
 		<br>
 
-		<%-- <s:if test="shop.token == null"> --%>
+		<s:if test="shop.token == null"> 
 
 			<a href="/CloudPrint/shop/auth">Authorize</a>
 
-		<%-- </s:if> --%>
+	    </s:if> 
 		<s:else>
 token: <s:property value="shop.token" />
 

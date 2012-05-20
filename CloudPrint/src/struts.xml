@@ -145,7 +145,7 @@
     
     	<action name="submit" class="cn.edu.tongji.sse.action.TaskAction" method="submit">
     		<interceptor-ref name="fileUpload">
-        		<param name="maximumSize">1000000</param>
+        		<param name="maximumSize">10000000</param>
         		<param name="allowedTypes">
             		application/msword
         		</param>        		
