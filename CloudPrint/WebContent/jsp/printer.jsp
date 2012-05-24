@@ -1,23 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="s" uri="/struts-tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>printer.jsp</title>
+<title>Select Printer</title>
+<link href="/CloudPrint/css/home.css" rel="stylesheet" type="text/css">
+<link href="/CloudPrint/css/page.css" rel="stylesheet" type="text/css">
+<link href="/CloudPrint/css/header.css" rel="stylesheet" type="text/css">
+<link href="/CloudPrint/css/footer.css" rel="stylesheet" type="text/css">
+<link href="/CloudPrint/css/grid.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-hikhjjljkl
-<s:iterator value="printers" status="status">
-<div>
-<hr>
-<a href="./printsettings?printerId=${id}">select</a> <br>
-<s:property value="id" /> <br>
-<s:property value="name" />
-</div>
+<body class="body">
 
-</s:iterator>
+<div id="wrap">
+		<header class="page_hd">
+			<nav>
+				<ul>
+					<li><a href="/CloudPrint/guest/home"><s:property
+								value="#session.username" /></a></li>
+					<li><a href="/CloudPrint/shop/home">我是打印店老板</a></li>
+					<li><a href="/CloudPrint/logout">登出</a></li>
+				</ul>
+			</nav>
+
+			<div class="page_meta">
+				<h1>
+					<a href="/CloudPrint/home">同济云打印</a>
+				</h1>
+			</div>
+
+		</header>
+		
+		<section class="tabs">
+			<ul>
+				<li>
+				选择打印机
+				</li>
+			</ul>
+		</section>
+
+		<div id="printer_grid">
+			<div class="grid clearfix">
+				<s:iterator value="printers" status="status">
+				
+					<article class="grid_cell">
+						
+
+<s:property value="name" /> <br>
+<a href="./printsettings?printerId=${id}">选择</a> <br>
+
+					</article>
+				</s:iterator>
+
+			</div>
+
+		</div>
+
+		<footer class="page_ft clearfix">
+			<p>
+				Copyright <span class="copy_icon">&copy;</span> 2012 hxbird. All
+				rights reserved.
+			</p>
+
+		</footer>
+	</div>
+
+
+
 
 </body>
 </html>

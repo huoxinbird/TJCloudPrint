@@ -1,0 +1,134 @@
+#wrap {
+    margin: 0 auto;
+    
+    
+    width: 960px;
+}
+
+
+
+a.hiddenanchor {
+    display: none;
+}
+
+#form_wrapper {
+    margin: 0 auto;
+    /*min-height: 560px;*/
+    position: relative;
+    /*right: 0;*/
+    width: 400px;
+}
+
+.form h3 {
+	text-align: center;
+}
+
+.form label {
+	display: block;
+}
+
+.form input:not([type="submit"]) {
+
+	
+	
+	border: 0 none;
+}
+
+
+.input_wrap {
+	margin: 15px 0px;
+	
+}
+
+.input_wrap label {
+	color: #676767;
+}
+
+.input_wrap input{
+	height: 40px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	/*border-radius: 4px;*/
+	box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.17);
+	position: relative;
+	font-size: 20px;
+	padding-left: 10px;
+
+	width: 100%;
+}
+
+#register, #login {
+    /*background: none repeat scroll 0 0 #F7F7F7;*/
+    background-color: #F4F4F4;
+    /*border: 1px solid rgba(147, 184, 189, 0.8);*/
+    border-radius: 7px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.17);
+    margin: 0 0 35px;
+    padding: 18px 6% 0px;
+    position: absolute;
+    top: 0;
+    width: 88%;
+}
+
+#register{  
+    z-index: 21;
+    opacity: 0;
+}
+#login{
+    z-index: 22;
+}
+
+
+#toregister:target ~ #form_wrapper #register,
+#tologin:target ~ #form_wrapper #login{
+    z-index: 22;
+    -webkit-animation-name: fadeInLeft;
+    -moz-animation-name: scaleIn;
+    
+    animation-name: fadeInLeft;
+    -webkit-animation-delay: .5s;
+    -moz-animation-delay: .5s;
+    
+    animation-delay: .5s;
+}
+#toregister:target ~ #form_wrapper #login,
+#tologin:target ~ #form_wrapper #register{
+    -webkit-animation-name: fadeOutLeft;
+    -moz-animation-name: scaleOut;
+    
+    animation-name: fadeOutLeft;
+}
+
+.change_link {
+	float: right;
+}
+
+.submit {
+	background-color: #7CC0CB;
+	/*background-image: -moz-linear-gradient(center top , #4D90FE, #4787ED);*/
+	border: 1px solid;
+	color: #FFFFFF;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+	height: 32px;
+	width: 52px;
+	/*font-family: Arial, "MS Trebuchet", sans-serif;*/
+	font-size: 14px;
+}
+
+
+/** the actual animation, credit where due : http://daneden.me/animate/ ***/
+.animate{
+    -webkit-animation-duration: 1.2s;
+    -webkit-animation-timing-function: ease;
+    -webkit-animation-fill-mode: both;
+    
+    -moz-animation-duration: 1.2s;
+    -moz-animation-timing-function: ease;
+    -moz-animation-fill-mode: both;
+    
+    
+    
+    animation-duration: 1.2s;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}

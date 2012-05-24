@@ -25,6 +25,7 @@ public class TaskAction implements ServletRequestAware {
 	private HttpServletRequest request;
 	private Long shopId;
 	private User user;
+	private Long taskId;
 	
 	private boolean isPostMethod() {
 		String method = request.getMethod();
@@ -67,6 +68,16 @@ public class TaskAction implements ServletRequestAware {
 	}
 
 
+	public String finish() {
+		
+		
+		
+		
+		taskService.finishTask(taskId);
+		
+		
+		return "success";
+	}
 
 
 	public void setDoc(File doc) {
@@ -106,6 +117,14 @@ public class TaskAction implements ServletRequestAware {
 
 	public void setSessionUser(User u) {
 		this.user = u;
+	}
+
+	public Long getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(Long taskId) {
+		this.taskId = taskId;
 	}
 	
 	

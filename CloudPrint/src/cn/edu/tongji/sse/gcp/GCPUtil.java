@@ -27,10 +27,12 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.tongji.sse.model.Printer;
 
+import com.google.api.client.auth.oauth2.draft10.AccessTokenRequest.RefreshTokenGrant;
 import com.google.api.client.auth.oauth2.draft10.AccessTokenResponse;
 import com.google.api.client.auth.oauth2.draft10.AccessTokenRequest.AuthorizationCodeGrant;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson.JacksonFactory;
+import com.sun.org.apache.xpath.internal.axes.SelfIteratorNoPredicate;
 
 
 @Component
@@ -38,6 +40,27 @@ public class GCPUtil implements IGCPUtil {
 	
 	private Client client;
 	static private String capabilities = "[{\"name\":\"psk:PageMediaSize\",\"type\":\"Feature\",\"options\":[{\"name\":\"psk:ISOA4\",\"scoredProperties\":{\"psk:MediaSizeWidth\":\"210000\",\"psk:MediaSizeHeight\":\"297000\"}}]}]";
+	
+	public String getRrefreshToken(String refresh) {
+		String result = null;
+		try {
+	        RefreshTokenGrant request = new RefreshTokenGrant(new NetHttpTransport(),
+	            new JacksonFactory(),
+	            "https://accounts.google.com/o/oauth2/token",
+	            client.getClientId(),
+	            client.getClientSecret(),
+	            refresh);
+	        AccessTokenResponse response = request.execute();
+	        System.out.println("refresh Access token: " + response.accessToken);
+	        result = response.accessToken;
+	      } catch (Exception e) {
+	        //AccessTokenErrorResponse response = e.response.parseAs(AccessTokenErrorResponse.class);
+	        //System.out.println("Error: " + response.error);
+	      }
+		return result;
+	}
+	
+	
 	
 	public String[] getAccessTokenWithCode(String code) {
 		System.out.println("requestAccessToken");
@@ -75,9 +98,17 @@ public class GCPUtil implements IGCPUtil {
 		
 	}
 	
-	public List<Printer> getPrinterList(String token) {
+	public List<Printer> getPrinterList(String token, String refreshToken) {
 		
 		JsonNode rootNode = requestToGcp(token,"http://www.google.com/cloudprint/search");
+		
+		
+		if (rootNode == null) {
+			String new_token = getRrefreshToken(refreshToken);
+			rootNode = requestToGcp(new_token,"http://www.google.com/cloudprint/search");
+		}
+		
+		
 		List<Printer> list = new ArrayList<Printer>();
 				
 		JsonNode successNode = rootNode.get("success");
@@ -154,7 +185,7 @@ public class GCPUtil implements IGCPUtil {
 	}
 
 	
-	private JsonNode requestToGcp(String token, String uri) {
+	public JsonNode requestToGcp(String token, String uri) {
 		
 		JsonNode result = null;
 		DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -165,9 +196,16 @@ public class GCPUtil implements IGCPUtil {
 						
 			
 			HttpResponse response = httpclient.execute(httpGet);
+
 			HttpEntity entity = response.getEntity();
 			
 			System.out.println(response.getStatusLine());
+			if (response.getStatusLine().equals("HTTP/1.1 403 You have to be signed in to your Google Account.")) {
+				
+				return null;
+			}
+			
+			
 			
 			if (entity != null) {
 				System.out.println("entity != null");

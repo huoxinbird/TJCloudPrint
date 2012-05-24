@@ -30,6 +30,9 @@ public class TaskService implements ITaskService {
 		if (mimetype.equalsIgnoreCase("application/msword")) {
 			return new Short((short)1);
 		}
+		else if (mimetype.equalsIgnoreCase("application/pdf")) {
+			return new Short((short)2);
+		}
 		
 		return null;
 	}
@@ -56,6 +59,13 @@ public class TaskService implements ITaskService {
 		t.setState((short)1);
 		
 		return taskDao.addTask(t);
+	}
+	
+	public boolean finishTask(Long taskId) {
+		
+		taskDao.finishTask(taskId);
+		
+		return true;
 	}
 	
 	public List<Task> getTasksOfUser(User u) {

@@ -11,4 +11,5 @@ public interface IShopDao {
 	public void setTokenForShopOfUser(Long id, String token, String refreshToken);
 	public List<Shop> getAuthorizedShops();
 	public Shop getShop(Long shopId);
+	public void updateShop(Shop shop);
 }

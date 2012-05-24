@@ -1,0 +1,17 @@
+.page_ft .copy_icon {
+    padding: 0 5px;
+}
+
+.page_ft p, .page_ft a {
+    
+    color: white;
+    line-height: 24px;
+    font: 13px/1.5em Helvetica,Arial,sans-serif;
+}
+
+.page_ft {
+    background: none repeat scroll 0 0 #7CC0CB;
+    margin-top: 70px;
+    padding: 10px 25px;
+    position: relative;
+}

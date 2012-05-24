@@ -113,10 +113,17 @@
 			
 		</action>
 		
+
+		
 		<action name="printsettings" class="cn.edu.tongji.sse.action.ShopAction" method="printsettings">
 			
 			<result name="success" type="redirectAction">
-    			<param name="actionName">login</param>
+    			<param name="actionName">home</param>
+    			<param name="namespace">..</param>
+			</result>
+			
+			<result name="input" type="redirectAction">
+    			<param name="actionName">home</param>
     			<param name="namespace">..</param>
 			</result>
 			
@@ -145,9 +152,10 @@
     
     	<action name="submit" class="cn.edu.tongji.sse.action.TaskAction" method="submit">
     		<interceptor-ref name="fileUpload">
-        		<param name="maximumSize">10000000</param>
+        		<param name="maximumSize">100000000</param>
         		<param name="allowedTypes">
-            		application/msword
+            		application/msword,application/pdf
+            		
         		</param>        		
     		</interceptor-ref>
     		<interceptor-ref name="sessionUserStack"/>
@@ -163,10 +171,16 @@
     			<param name="actionName">login</param>
     			<param name="namespace">..</param>
 			</result>
-				
-			
-			
-			
+	
+		</action>
+    
+    	
+    	<action name="finish" class="cn.edu.tongji.sse.action.TaskAction" method="finish">
+			<result type="redirectAction">
+    			<param name="actionName">home</param>
+    			<param name="namespace">../shop</param>
+			</result>
+		
 		</action>
     
     </package>

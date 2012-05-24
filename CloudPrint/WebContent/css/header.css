@@ -1,0 +1,78 @@
+.page_hd {
+    
+    min-height: 90px;
+    padding-top: 40px;
+    position: relative;	
+
+    
+    margin-bottom: 10px;
+    
+}
+
+.page_hd, h1 {
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.page_hd .page_meta h1 a:first-letter {
+    background: none repeat scroll 0 0 #989898;
+    color: #F7F7F7;
+    padding-left: 17px;
+}
+
+.page_hd .page_meta h1 a {
+    color: #5C5C5C;
+    display: block;
+    font-size: 32px;
+    line-height: 36px;
+}
+
+.page_hd nav {
+    float: right;
+    margin-left: 80px;
+    max-width: 500px;
+    padding-top: 8px;
+}
+
+.page_hd nav li, .page_hd nav a {
+    display: inline-block;
+}
+
+.page_hd nav a {
+    color: #999999;
+    font-size: 18px;
+    line-height: 28px;
+    padding-left: 20px;
+}
+
+.page_hd nav a:focus, .page_hd nav a:hover {
+    color: #7CC0CB;
+}
+
+.tabs {
+	border-bottom: 1px dotted #CCCCCC;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    
+}
+
+.tabs li {
+	display: inline-block;
+	
+
+}
+
+.tabs a {    
+	font-size: 13px;
+    padding: 4px 9px;
+    
+    border-radius: 10px;
+    color: #707070;
+    cursor: pointer;
+}
+
+.tabs a:hover, .tabs a.current {
+	background: none repeat scroll 0 0 #7CC0CB;
+	color: white;
+	
+}

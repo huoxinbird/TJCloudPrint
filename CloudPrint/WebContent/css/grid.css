@@ -1,0 +1,36 @@
+.grid {
+    
+}
+
+
+
+.grid_cell {
+    background-color: #F4F4F4;
+    color: #676767;
+    float: left;
+    width: 220px;
+    height: 200px;
+    margin: 10px 10px;
+    position: relative;
+    transition: background 0.5s , color 0.5s;
+    -moz-transition: background 0.5s , color 0.5s;
+    -webkit-transition: background 0.5s , color 0.5s;
+    border-radius: 8px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.17);
+    
+}
+
+
+.grid_cell h2 {
+    margin: 15px auto;
+    text-align: center;
+}
+
+.grid_cell:hover {
+    background-color: #7CC0CB;
+    color: white;
+   
+}
+
+
+

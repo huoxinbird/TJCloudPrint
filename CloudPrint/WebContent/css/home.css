@@ -1,0 +1,20 @@
+
+
+
+#wrap {
+    margin: 0 auto;
+    
+    
+    width: 960px;
+}
+
+
+#shop_grid {
+    margin: 20px 0px;
+}
+
+
+#shop_grid .grid_cell {
+	cursor: pointer;
+}
+

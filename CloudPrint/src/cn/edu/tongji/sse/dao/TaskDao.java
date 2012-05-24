@@ -10,9 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-
 import cn.edu.tongji.sse.model.Task;
-import cn.edu.tongji.sse.model.User;
 
 public class TaskDao extends HibernateDaoSupport implements ITaskDao {
 	public Long addTask(Task t) {
@@ -29,8 +27,7 @@ public class TaskDao extends HibernateDaoSupport implements ITaskDao {
 			public List<Task> doInHibernate(Session session) throws HibernateException {					
 				
 				List<Task> result = session.createCriteria(Task.class).add(
-						Restrictions.eq("shop.id",shopId)).add(
-						Restrictions.eq("state", (short)1)).addOrder(
+						Restrictions.eq("shop.id",shopId)).addOrder(
 						Order.asc("createDate")).setFetchSize(5).list();	
 								
 				return result;
@@ -68,6 +65,20 @@ public class TaskDao extends HibernateDaoSupport implements ITaskDao {
 				taskId);
 		
 		
+	}
+
+	
+	public boolean finishTask(final Long taskId) {
+		
+		Task t = getHibernateTemplate().get(Task.class,taskId);				
+		
+		t.setState((short) 2);
+		t.setFinishDate(new Date());
+				
+		getHibernateTemplate().update(t);
+		
+		
+		return false;
 	}
 	
 }

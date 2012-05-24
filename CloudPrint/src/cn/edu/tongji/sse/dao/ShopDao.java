@@ -67,6 +67,11 @@ public class ShopDao extends HibernateDaoSupport implements IShopDao {
 
 
 	
+	public void updateShop(Shop shop) {
+		getHibernateTemplate().update(shop);
+	}
+
+	
 	public void setTokenForShopOfUser(final Long id, final String token, final String refreshToken) {
 		
 		getHibernateTemplate().execute(new HibernateCallback< List<Shop> > () {			

@@ -43,7 +43,7 @@ public class Shop implements Serializable {
 		this.name = name;
 	}
 	
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
 	public User getUser() {

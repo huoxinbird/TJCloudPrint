@@ -14,6 +14,9 @@ import javax.persistence.Transient;
 
 
 @Entity
+@org.hibernate.annotations.Entity(
+		dynamicUpdate = true
+)
 public class Task implements Serializable {
 
 	private static final long serialVersionUID = -366840727953692960L;
@@ -90,20 +93,30 @@ public class Task implements Serializable {
 	}
 	
 	@Transient
+	public String getFileTypeName() {
+		if (fileType == (short)1) {
+			return "application/msword";
+		}
+		else if (fileType == (short)2) {
+			return "application/pdf";
+		}
+		
+		return null;
+	}
+	
+	@Transient
 	public String getStateName() {
 		String result = null;
 		if (state == (short)0) {
 			result = "error";
 		}
 		else if (state == (short)1) {
-			result = "pending";
+			result = "waiting";
 		}
 		else if (state == (short)2) {
-			result = "printing";
-		}
-		else if (state == (short)1) {
 			result = "done";
 		}
+
 		return result;
 	}
 	
