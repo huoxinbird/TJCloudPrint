@@ -122,8 +122,13 @@ public class Task implements Serializable {
 	
 	@Transient
 	public String getCreateDateString() {
-		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 		return dateformat.format(createDate);
 	}
 	
+	@Transient
+	public String getCreateTimeString() {
+		SimpleDateFormat dateformat = new SimpleDateFormat("HH:mm:ss");
+		return dateformat.format(createDate);
+	}
 }

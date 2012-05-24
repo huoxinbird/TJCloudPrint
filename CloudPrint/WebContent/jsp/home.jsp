@@ -41,7 +41,7 @@
 		<section class="tabs">
 			<ul>
 				<li>
-				全部打印店
+				<a class="current">全部打印店</a>
 				</li>
 			</ul>
 		</section>

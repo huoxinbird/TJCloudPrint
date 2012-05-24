@@ -8,6 +8,13 @@ html, body, div, span, ul, li {
     border-top: 7px solid #7CC0CB;
 }
 
+#wrap {
+    margin: 0 auto;
+    
+    
+    width: 960px;
+}
+
 a:link, a:hover, a:active, a:visited, a:focus {
     outline: 0 none;
     text-decoration: none;

@@ -18,6 +18,9 @@
     background: none repeat scroll 0 0 #989898;
     color: #F7F7F7;
     padding-left: 17px;
+    padding-top: 2px;
+    /* border-top-left-radius:10px; */
+    border-bottom-left-radius: 10px;
 }
 
 .page_hd .page_meta h1 a {

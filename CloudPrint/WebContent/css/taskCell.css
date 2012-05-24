@@ -1,0 +1,24 @@
+
+h5.create_date {
+	margin-left: 15px;
+	margin-bottom: 20px;
+	float: left;
+	
+}
+
+h5.create_time {
+	margin-right: 15px;
+	margin-bottom: 20px;
+	float: right;
+}
+
+article img {
+	display: block;
+	
+	margin: 0 auto;
+}
+
+article hr {
+	clear: both;
+	visibility: hidden;
+}

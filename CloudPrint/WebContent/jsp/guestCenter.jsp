@@ -11,6 +11,7 @@
 <link href="/CloudPrint/css/header.css" rel="stylesheet" type="text/css">
 <link href="/CloudPrint/css/footer.css" rel="stylesheet" type="text/css">
 <link href="/CloudPrint/css/grid.css" rel="stylesheet" type="text/css">
+<link href="/CloudPrint/css/taskCell.css" rel="stylesheet" type="text/css">
 <script src="/CloudPrint/js/jquery-1.7.2.min.js"></script>
 <script src="/CloudPrint/js/task.js"></script>
 
@@ -57,14 +58,20 @@
 <s:if test="stateName == 'waiting'">
 
 <article class="grid_cell waiting_task">
-
-						fileName:
-						<s:property value="fileName" />
-						<br> state:
-						<s:property value="stateName" />
-						<br> createDate:
-						<s:property value="createDateString" />
-						<br>
+<h5 class="create_date"><s:property value="createDateString" /></h5>
+<h5 class="create_time"><s:property value="createTimeString" /></h5>
+<hr>						
+						
+						<s:if test="fileTypeName == 'application/msword'">
+						<img src="/CloudPrint/img/word.png" height="64" width="64" /> 
+						</s:if>
+						<s:else>
+						<img src="/CloudPrint/img/pdf.png" height="64" width="64" />
+						</s:else>
+						
+						<h2><s:property value="fileName" /></h2>
+						
+						
 
 					</article>
 
@@ -74,13 +81,18 @@
 
 <article class="grid_cell done_task">
 
-						fileName:
-						<s:property value="fileName" />
-						<br> state:
-						<s:property value="stateName" />
-						<br> createDate:
-						<s:property value="createDateString" />
-						<br>
+						<h5 class="create_date"><s:property value="createDateString" /></h5>
+						<h5 class="create_time"><s:property value="createTimeString" /></h5>
+						<hr>
+						
+						<s:if test="fileTypeName == 'application/msword'">
+						<img src="/CloudPrint/img/word.png" height="64" width="64" /> 
+						</s:if>
+						<s:else>
+						<img src="/CloudPrint/img/pdf.png" height="64" width="64" />
+						</s:else>
+						
+						<h2><s:property value="fileName" /></h2>
 
 					</article>
 

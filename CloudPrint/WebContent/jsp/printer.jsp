@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Select Printer</title>
-<link href="/CloudPrint/css/home.css" rel="stylesheet" type="text/css">
+<link href="/CloudPrint/css/selectPrinter.css" rel="stylesheet" type="text/css">
 <link href="/CloudPrint/css/page.css" rel="stylesheet" type="text/css">
 <link href="/CloudPrint/css/header.css" rel="stylesheet" type="text/css">
 <link href="/CloudPrint/css/footer.css" rel="stylesheet" type="text/css">
@@ -36,7 +36,7 @@
 		<section class="tabs">
 			<ul>
 				<li>
-				选择打印机
+				<a class="current">选择打印机</a>
 				</li>
 			</ul>
 		</section>
@@ -45,11 +45,10 @@
 			<div class="grid clearfix">
 				<s:iterator value="printers" status="status">
 				
-					<article class="grid_cell">
+					<article class="grid_cell" onclick="location.href='/CloudPrint/shop/printsettings?printerId=${id}';">
 						
 
-<s:property value="name" /> <br>
-<a href="./printsettings?printerId=${id}">选择</a> <br>
+<h2><s:property value="name" /></h2>
 
 					</article>
 				</s:iterator>
