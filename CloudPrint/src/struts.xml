@@ -117,10 +117,10 @@
 		
 		<action name="printsettings" class="cn.edu.tongji.sse.action.ShopAction" method="printsettings">
 			
-			<result name="success" type="redirectAction">
-    			<param name="actionName">home</param>
-    			<param name="namespace">..</param>
-			</result>
+			<result name="success" type="redirectAction">home</result>
+    			
+    			
+			
 			
 			<result name="input" type="redirectAction">
     			<param name="actionName">home</param>

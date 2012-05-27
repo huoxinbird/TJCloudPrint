@@ -6,11 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Select Printer</title>
-<link href="/CloudPrint/css/selectPrinter.css" rel="stylesheet" type="text/css">
+
 <link href="/CloudPrint/css/page.css" rel="stylesheet" type="text/css">
 <link href="/CloudPrint/css/header.css" rel="stylesheet" type="text/css">
 <link href="/CloudPrint/css/footer.css" rel="stylesheet" type="text/css">
 <link href="/CloudPrint/css/grid.css" rel="stylesheet" type="text/css">
+<link href="/CloudPrint/css/selectPrinter.css" rel="stylesheet" type="text/css">
 </head>
 <body class="body">
 
@@ -49,6 +50,7 @@
 						
 
 <h2><s:property value="name" /></h2>
+<img src="/CloudPrint/img/printer.png" height="100" width="100" />
 
 					</article>
 				</s:iterator>

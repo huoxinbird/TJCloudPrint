@@ -1,6 +1,10 @@
 
 
 
+#shop_grid .grid_cell img {
+	margin: 25px auto 0 auto;
+	display: block;
+}
 
 
 

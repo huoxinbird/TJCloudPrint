@@ -43,10 +43,10 @@
 		<section class="tabs">
 			<ul>
 				<li>
-				<a  id="waitingtab" class="current">未完成打印任务</a>
+				<a  id="waitingtab" class="current">等待处理的打印任务</a>
 				</li>
 				<li>
-				<a  id="donetab" >已完成打印任务</a>
+				<a  id="donetab" >可领取的打印任务</a>
 				</li>
 			</ul>
 		</section>

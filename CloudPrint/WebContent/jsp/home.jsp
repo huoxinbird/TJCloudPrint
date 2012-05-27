@@ -54,7 +54,7 @@
 						<h2>
 							<s:property value="name" />
 						</h2>
-
+<img src="/CloudPrint/img/shop2.png" height="100" width="100" />
 
 					</article>
 				</s:iterator>

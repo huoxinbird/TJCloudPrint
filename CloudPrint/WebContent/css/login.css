@@ -82,10 +82,10 @@ a.hiddenanchor {
 #toregister:target ~ #form_wrapper #register,
 #tologin:target ~ #form_wrapper #login{
     z-index: 22;
-    -webkit-animation-name: fadeInLeft;
+    -webkit-animation-name: scaleIn;
     -moz-animation-name: scaleIn;
     
-    animation-name: fadeInLeft;
+    animation-name: scaleIn;
     -webkit-animation-delay: .5s;
     -moz-animation-delay: .5s;
     
@@ -93,10 +93,10 @@ a.hiddenanchor {
 }
 #toregister:target ~ #form_wrapper #login,
 #tologin:target ~ #form_wrapper #register{
-    -webkit-animation-name: fadeOutLeft;
+    -webkit-animation-name: scaleOut;
     -moz-animation-name: scaleOut;
     
-    animation-name: fadeOutLeft;
+    animation-name: scaleOut;
 }
 
 .change_link {
