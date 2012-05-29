@@ -39,7 +39,8 @@ import com.sun.org.apache.xpath.internal.axes.SelfIteratorNoPredicate;
 public class GCPUtil implements IGCPUtil {
 	
 	private Client client;
-	static private String capabilities = "[{\"name\":\"psk:PageMediaSize\",\"type\":\"Feature\",\"options\":[{\"name\":\"psk:ISOA4\",\"scoredProperties\":{\"psk:MediaSizeWidth\":\"210000\",\"psk:MediaSizeHeight\":\"297000\"}}]}]";
+	//static private String capabilities = "[{\"name\":\"psk:PageMediaSize\",\"type\":\"Feature\",\"options\":[{\"name\":\"psk:ISOA4\",\"scoredProperties\":{\"psk:MediaSizeWidth\":\"210000\",\"psk:MediaSizeHeight\":\"297000\"}}]}]";
+	static private String capabilities = "[]";
 	
 	public String getRrefreshToken(String refresh) {
 		String result = null;

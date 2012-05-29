@@ -40,7 +40,7 @@ public class Task implements Serializable {
 		this.id = id;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
     @JoinColumn(name = "user_id")
 	public User getUser() {
 		return user;
@@ -49,7 +49,7 @@ public class Task implements Serializable {
 		this.user = user;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
     @JoinColumn(name = "shop_id")
 	public Shop getShop() {
 		return shop;

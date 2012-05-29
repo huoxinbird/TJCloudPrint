@@ -104,9 +104,10 @@
 <s:if test="stateName == 'waiting'">
 
 <article class="grid_cell waiting_task">
-
+<h4 class="user_name"><s:property value="user.username" /></h4>
 <h5 class="create_date"><s:property value="createDateString" /></h5>
 <h5 class="create_time"><s:property value="createTimeString" /></h5>
+
 					<hr>	
 						
 						<s:if test="fileTypeName == 'application/msword'">
@@ -132,9 +133,10 @@
 			
 
 <article class="grid_cell done_task">
-
+<h4 class="user_name"><s:property value="user.username" /></h4>	
 <h5 class="create_date"><s:property value="createDateString" /></h5>
-<h5 class="create_time"><s:property value="createTimeString" /></h5>	
+<h5 class="create_time"><s:property value="createTimeString" /></h5>
+
 <hr>					
 						
 						<s:if test="fileTypeName == 'application/msword'">

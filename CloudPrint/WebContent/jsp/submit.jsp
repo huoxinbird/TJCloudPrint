@@ -10,7 +10,7 @@
 
 <form action="/CloudPrint/task/submit" enctype="multipart/form-data" method="post">
 <input type="file" name="doc" />
-<input type="submit" value="Upload"/>
+<input type="submit" value="上传"/>
 <input type="hidden" name="shopId" value="${shopId}" />
 </form>
 
